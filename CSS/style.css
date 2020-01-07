@@ -1,6 +1,22 @@
 .top{
 display: flex;
 }
+
+
+.navbar{
+    margin-top: 0px;
+    box-shadow: 0px 2px 3px #353333;
+    background: #080303;
+    opacity: 0.9;
+}
+
+
+.navbar-fixed-top {
+    top: 0px;
+    border-width: 0 0 1px;
+}
+
+
 footer .input-group-addon {
 background-color: blue;
 padding: 7px
@@ -51,6 +67,37 @@ height: 200px;
 .product-detail {
 padding-top: 30px;
 }
+
+.promo-title {
+    background-color: #fff;
+    border: 1px solid #f30;
+    padding: 10px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.promo-title .promo-title-a {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+    line-height: 40px;
+    background-color: #f30;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0 25px;
+    font-size: 20px;
+    position: relative;
+    top: -20px;
+    margin-top: -30px;
+}
+a, .text-link {
+    color: #0657a3;
+    text-decoration: none;
+    background: transparent;
+}
+
 .text ul li{
 list-style-type: none;
 }
@@ -192,11 +239,6 @@ border-color: #05a;
 .form .social-icons {
 font-size:20px;
 }
-.form .social-icons {
-}
-.second-section{
-
-}
 .social-links {
 margin: 0px 0px 20px 0px;
 text-align: center;
@@ -313,9 +355,6 @@ transition: .5s ease-in;
 }
 .bottom-text h4 a:hover {
 color:#ef4d4d;
-
-}
-.footer-w3l {
 
 }
 .footer-w3l p{
@@ -570,4 +609,41 @@ font-size: 9px;
 @media only screen and (max-width:320px) {
 .login-title h1 {
 font-size: 20px;
+}
+
+.banner-tems {
+    padding-top: 200px;
+    padding-bottom: 40px;
+    background: url(http://landing.engotheme.com/html/skyline/demo/images/Reservation/header.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.body-room-2 .wrap-room2 .text {
+    padding-top: 36px;
+}
+
+@media (max-width: 1200px) and (min-width: 992px)
+.text {
+    padding-top: 0px;
+}
+
+.img{
+    position: absolute;
+    width: 30px;
+    top: 37px;
+    bottom: 43px;
+    right: 0px;
+    background-color: #fff;
+    z-index: 2;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    box-sizing: border-box;
 }

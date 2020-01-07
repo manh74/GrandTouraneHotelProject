@@ -21,7 +21,55 @@
 		<?php
 		include "connect.php";
 		?>
-		<div class="container-fluid">
+		
+<div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1100px; ">
+	<div class="collapse navbar-collapse" id="navbar">
+	<a class="navbar-brand" href="#"><img src="img/logo2.png"></a>
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">HOME
+					<span class="sr-only">(current)</span>
+				</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link" href="room-rate.php">ROOM & RATE</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="food.php">FOOD</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="tour-desk.php">TOUR DESK</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="gallery.php">GALLERY</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="info.php">ABOUT US</a>
+			</li>
+			<li class="nav-item">
+				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">
+					<div class="textbox">
+						<form class="form-inline">
+							<div class="form-group">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Search something..">
+									<button class="btn btn-secondary" type="button">
+									<i class="ion-ios-search-strong"></i>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</nav>
+</div>
+
+
+<div class="container">
 			<form action="index.php" method="post">
 				<div class="top">
 					<p><i class="ion-ios-location-outline"></i> 252 Võ Nguyên Giáp, Phước Mỹ, Sơn Trà, Đà Nẵng</p>
@@ -115,58 +163,17 @@
 		</div>
 	</div>
 </div>
-<nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-light bg-light ">
-	<a class="navbar-brand" href="#"><img src="img/logo2.png"></a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
-	<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbar">
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="#">HOME
-					<span class="sr-only">(current)</span>
-				</a>
-			</li>
-			
-			<li class="nav-item">
-				<a class="nav-link" href="#">ROOM & RATE</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">FOOD</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">TOUR DESK</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">GALLERY</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">ABOUT US</a>
-			</li>
-			<li class="nav-item">
-				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">
-					<div class="textbox">
-						<form class="form-inline">
-							<div class="form-group">
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search something..">
-									<button class="btn btn-secondary" type="button">
-									<i class="ion-ios-search-strong"></i>
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
-</div>
-</nav>
-<div class="container">
+
+
+
+
+<div class="container" style="margin-top: 100px">
+
+<div class="promo-title">
+	<a class="promo-title-a" href="">ROOM</a>
+
 <div class="product-detail">
 	<div style="display: flex; justify-content: space-between;">
-		<h2 class="product-detail_title">ROOM</h2>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#btAdd">ADD NEW ROOM</button>
 		<div class="modal fade" id="btAdd" tabindex="-1" role="dialog" aria-labelledby="addNewRoom" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -254,6 +261,7 @@
 				<?php  echo $about_select[0][2] ?>
 			</div>
 			<a href="room-detail.html" class="btn btn-room">VIEW DETAILS</a>
+			
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  no-padding-right col-lg-push-6 col-md-push-6 ">

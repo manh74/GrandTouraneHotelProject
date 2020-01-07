@@ -28,12 +28,12 @@ insert into Users values
 	);
     
     insert into rooms values
-    (1,"https://media-cdn.tripadvisor.com/media/photo-s/09/70/7a/7e/muong-thanh-luxury-nhat.jpg","VIP","320000","3 person","5"),
-(2,"http://landing.engotheme.com/html/skyline/demo/images/Home-2/rooms-1.jpg","VIP","320000","3 person","5"),
-    (3,"","VIP","320000","4 person","5"),
-    (4,"","VIP","320000","1 person","5"),
-    (5,"","VIP","3245000","2 person","5"),
-    (6,"","VIP","320000","2 person","5");
+    (1,"https://media-cdn.tripadvisor.com/media/photo-s/09/70/7a/7e/muong-thanh-luxury-nhat.jpg","VIP","320000","4 person","5"),
+(2,"http://landing.engotheme.com/html/skyline/demo/images/Home-2/rooms-1.jpg","VIP","320000","4 person","5"),
+    (3,"https://www.chudu43.com/wp-content/uploads/2019/03/Grand-Tourane-Hotel-Da-Nang-1.jpg","VIP","320000","2 person","5"),
+    (4,"https://aff.bstatic.com/images/hotel/max500/166/166181203.jpg","VIP","320000","1 person","5"),
+    (5,"https://m.justgola.com/media/a/00/19/105495_og_1.jpeg","VIP","3245000","2 person","5"),
+    (6,"http://villadulich.vn/public/uploads/du-an/chi-tiet/Kh%C3%A1ch%20s%E1%BA%A1n%20Grand%20Tourane/111216833.jpg","VIP","320000","2 person","5");
     
     
     create table about(
@@ -44,6 +44,6 @@ insert into Users values
         
 	insert into about values
     (1,"ABOUT US","Beautifully located by the My Khe beach, amongst the top six in the world, and about 5-minute away from the centre of Danang city, Grand Tourane Hotel welcomes all who are looking for the breathtaking – ocean view accommodation, finest facilities and warm service. 188 luxuriously appointed rooms and suites offering a stunning view over My Khe beach or the city skyline, from the well-equipped meeting rooms to the tennis court, make the hotel a perfect choice for business and leisure. Cap a day of exploration with beauty and wellness therapies at our hotel spa, savor the delicacies at an all-day dining restaurant Bella Vista, or soak up the sun while enjoying at the pool bar..."),
-    (2,"WHY GUEST CHOOSE MY HOTEL?","Thich thi den thoi!");
+    (2,"WHY GUEST CHOOSE MY HOTEL?","Ahihi -.- Thich thi den thoi!");
     
     
