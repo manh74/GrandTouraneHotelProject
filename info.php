@@ -37,14 +37,15 @@
 				<li class="nav-item">
 					<a class="nav-link" href="food.php">FOOD</a>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item">
 					<a class="nav-link" href="book-tour.php">TOUR DESK</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="gallery.php">GALLERY</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="info.php">ABOUT US</a>
+					<a class="nav-link active" href="info.php">ABOUT US
+					<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">

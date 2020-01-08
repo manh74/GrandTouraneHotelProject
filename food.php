@@ -34,10 +34,10 @@
 				<li class="nav-item">
 					<a class="nav-link" href="room-rate.php">ROOM & RATE</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item active">
 					<a class="nav-link" href="food.php">FOOD</a>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item">
 					<a class="nav-link" href="book-tour.php">TOUR DESK</a>
 				</li>
 				<li class="nav-item">

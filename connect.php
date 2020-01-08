@@ -21,4 +21,10 @@ header("refresh:0");
 $about = "SELECT * FROM about";
 $about_select = $db->query($about)->fetch_all();
 
+$food_select_sql = "SELECT * FROM foods";
+$food_select = $db->query($food_select_sql)->fetch_all();
+
+$cmt_select_sql = "SELECT * FROM comments";
+$cmt_select = $db->query($cmt_select_sql)->fetch_all();
+
 ?>
