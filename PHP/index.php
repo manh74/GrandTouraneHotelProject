@@ -381,12 +381,12 @@
 				</div>
 			</div>
 			<div style="display: flex">
-				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 no-padding-left">
+				<div class="col-xss-12 col-xs-6 col-sm-6">
 					<div class="img">
-						<img src="https://pix10.agoda.net/hotelImages/1158339/-1/889f782f885aada574dc862fd83c3c5f.jpg?s=1024x768" alt="#" class="img-responsive" width="550px" height="400px">
+						<img src="https://pix10.agoda.net/hotelImages/1158339/-1/889f782f885aada574dc862fd83c3c5f.jpg?s=1024x768" width="550px">
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  no-padding-right col-lg-push-6 col-md-push-6 ">
+				<div class="col-xss-12 col-xs-6 col-sm-6">
 					<div class="text">
 						<h2 class="heading"><?php  echo $about_select[1][1] ?></h2>
 						<div class="desc">

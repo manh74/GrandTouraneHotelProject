@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<title>About Us</title>
-	<link REL="SHORTCUT ICON" HREF="img/logo.jpg">
-	<link rel="stylesheet" type="text/css" href="CSS/style.css">
+	<link REL="SHORTCUT ICON" HREF="../img/logo.jpg">
+	<link rel="stylesheet" type="text/css" href="../CSS/style.css">
 	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script
@@ -74,35 +74,18 @@
 </div>
 <br><br><br><br>
 <div class="container">
-<div style="background-image: url(//bizweb.dktcdn.net/100/350/980/themes/745359/assets/bg_breadcrumb.png?1574937093543);
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    float: left;
-    padding: 60px 0;
-    margin-bottom: 40">
-	<div style="    float: left;
-    text-align: left;">
-		<div class="container" style="text-align: center;">
-			<p style="    font-weight: 700;
-    font-size: 36px;
-    line-height: 50px;
-    font-family: "Quicksand,sans-serif;
-    color: #000;">Giới thiệu</p>
-		</div>
-	</div>
 	<section style="background: transparent;">
 	<span class="crumb-border"></span>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 a-center">
-				<ul class="breadcrumb" itemscope="" itemtype="https://data-vocabulary.org/Breadcrumb">					
+			<div class="col-xs-12">
+				<ul class="breadcrumb"  itemtype="https://data-vocabulary.org/Breadcrumb">					
 					<li class="home">
-						<a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>						
-						<span class="mr_lr">&nbsp;<i class="fa fa-angle-right"></i>&nbsp;</span>
+						<a><span>Home</span></a>						
+						<span>&nbsp;<i class="fa fa-angle-right"></i>&nbsp;</span>
 					</li>
 					
-					<li><strong><span itemprop="title">Giới thiệu</span></strong></li>
+					<li><strong><span>About us</span></strong></li>
 					
 				</ul>
 			</div>

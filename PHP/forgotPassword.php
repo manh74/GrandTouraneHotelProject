@@ -56,13 +56,5 @@
 </div>
 
 </div>
-
-
-
-
-
-<div class="footer-w3l">
-  <p class="agile"> &copy;All Rights Reserved | Design by Nguyen Manh</p>
-</div>
 </body>
 </html>

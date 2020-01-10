@@ -4,8 +4,8 @@
   <title>Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" href="CSS/style.css">
-  <link href="CSS/font-awesome.css" rel="stylesheet"> 
+  <link rel="stylesheet" href="../CSS/style.css">
+  <link href="../CSS/font-awesome.css" rel="stylesheet"> 
   <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
@@ -62,14 +62,6 @@
 </div>
 </div>
 
-</div>
-
-
-
-
-
-<div class="footer-w3l">
-  <p class="agile"> &copy;All Rights Reserved | Design by Nguyen Manh</p>
 </div>
 </body>
 </html>
