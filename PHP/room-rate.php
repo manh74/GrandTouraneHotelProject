@@ -19,7 +19,7 @@
     <script src="../JS/js.js" type="text/javascript"></script>
 </head>
 <body>
-
+<?php session_start(); ?>
 <div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1110px; ">
         <div class="collapse navbar-collapse" id="navbar">
             <a class="navbar-brand" href="#"><img src="../img/logo2.png"></a>
@@ -60,14 +60,26 @@
                     </div>
                 </li>
                 <li class="nav-item active" style="display: flex">
-                    <a class="nav-link" href="food.php"><i class="ion-person"></i></a>
-                    <a class="nav-link" href="food.php"><i class="ion-ios-cart"></i></a>
-                    <a class="nav-link" href="food.php"><i class="ion-log-out"></i></a>
+                    <?php if(isset($_SESSION["log-in"])){ ?>
+                    <a class="nav-link" name="profile" href="profile.php"><i class="ion-person"></i></a>
+                    <a class="nav-link" name="cart" href="cart.php"><i class="ion-ios-cart"></i></a>
+                    <form method="post">
+                    <button style="background: none;border: none;" type="submit" name="log-out"><a class="nav-link"  id="log-out" ><i class="ion-log-out"></i></a></button>
+                    <?php } else{?>
+                    <button style="background: none;border: none;" type="submit" id="log-in" data-toggle="modal" data-target="#login"><a class="nav-link"><i class="ion-log-in"></i></a></button>
+                <?php } ?>
+                </form>
+                    <?php 
+                        if (isset($_POST['log-out'])) {
+                            session_destroy();
+                            header("refresh:0");
+                        } 
+                    ?>
                 </li>
             </ul>
         </div>
     </nav>
-    
+    <?php include 'login-modal.php'; ?>
 <div style="width: 100%; height: 20px; border-bottom: 2px solid red; text-align: center; margin-top: 170px">
   <span style="font-size: 40px; background-color: #F3F5F6; padding: 0 10px;">
     ROOM & RATE 
@@ -75,7 +87,7 @@
 </div>
 </div>
 
-<div class="container" style="border: 1px solid">
+<div class="container" style="border: 1px solid #E5C9EF">
 <br><br><hr>
 <?php 
 include "connect.php";
@@ -92,8 +104,12 @@ for($i = 0; $i < count($room_select); $i++){
                                 <h2><?php echo $room_select[$i][2]."/".$room_select[$i][4] ?></h2>
                                 <h5><?php echo $room_select[$i][3] ?> per day</h5>
                                 <p> ABC </p>
-                                <a href="room-detail.html" class="btn btn-room">VIEW DETAILS</a>
-                                <button class="btn btn-room" style="background-color: #c0a753">BOOK NOW </button>
+                                <button class="btn btn-primary"><i class="fa fa-info" aria-hidden="true"></i></button>
+                                <a class="btn btn-primary" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                                <?php if(isset($_SESSION["admin"])){?>
+                                <button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+                            <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -106,8 +122,12 @@ for($i = 0; $i < count($room_select); $i++){
                                 <h5> <?php echo $room_select[$i][3] ?> per day</h5>
                                 <p>ABC
                                 </p>
-                                <a href="room-detail.html" class="view-dateails btn btn-room">VIEW DETAILS</a>
-                                <button class="btn btn-room" style="background-color: #c0a753">BOOK NOW </button>
+                                <button class="btn btn-primary"><i class="fa fa-info" aria-hidden="true"></i></button>
+                                <a class="btn btn-primary" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                                <?php if(isset($_SESSION["admin"])){?>
+                                <button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+                            <?php } ?>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">

@@ -20,6 +20,7 @@
 </head>
 <body>
 	<?php
+	session_start();
 	include "connect.php";
 	?>
 
@@ -63,16 +64,28 @@
 					</div>
 				</li>
 				<li class="nav-item" style="display: flex">
-					<a class="nav-link" href="food.php"><i class="ion-person"></i></a>
-					<a class="nav-link" href="food.php"><i class="ion-ios-cart"></i></a>
-					<a class="nav-link" href="food.php"><i class="ion-log-out"></i></a>
+					<?php if(isset($_SESSION["log-in"])){ ?>
+					<a class="nav-link" name="profile" href="profile.php"><i class="ion-person"></i></a>
+					<a class="nav-link" name="cart" href="cart.php"><i class="ion-ios-cart"></i></a>
+					<form method="post">
+					<button style="background: none;border: none;" type="submit" name="log-out"><a class="nav-link"  id="log-out" ><i class="ion-log-out"></i></a></button>
+					<?php } else{?>
+					<button style="background: none;border: none;" type="submit" id="log-in" data-toggle="modal" data-target="#login"><a class="nav-link"><i class="ion-log-in"></i></a></button>
+					<?php } ?>
+				</form>
+					<?php 
+						if (isset($_POST['log-out'])) {
+							session_destroy();
+							header("refresh:0");
+						} 
+					?>
 				</li>
 			</ul>
 		</div>
 	</nav>
 	<br>
 
-
+<?php include 'login-modal.php'; ?>
 	<div style="width: 100%; height: 20px; border-bottom: 2px solid red; text-align: center; margin-top: 100px">
 		<span style="font-size: 40px; background-color: white; padding: 0 10px;">
 			TOUR DESK 
@@ -146,10 +159,14 @@
 				</div>
 				<div style="display: flex; justify-content: space-between; align-items: center;">
 					<div> <p style="color: #ff5722; font-weight: 500; ">
-					<?php  echo number_format($tours[$i][5]) ?> </p>
+					<?php  echo number_format($tours[$i][5])."đ" ?> </p>
 				</div>
 				<div>
-					<button type="button" class="btn btn-primary">BOOK TOUR</button>
+					<button type="button" class="btn btn-primary"><i class="ion-ios-cart"></i></button>
+					<?php if(isset($_SESSION["admin"])){?>
+						<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+						<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+					<?php } ?>
 				</div>
 			</div>
 		</div>

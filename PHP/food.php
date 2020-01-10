@@ -20,6 +20,7 @@
 </head>
 <body>
 	<?php
+	session_start();
 	include "connect.php";
 	?>
 	<div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1110px; ">
@@ -63,13 +64,52 @@
 					</div>
 				</li>
 				<li class="nav-item" style="display: flex">
-					<a class="nav-link" href="food.php"><i class="ion-person"></i></a>
-					<a class="nav-link" href="food.php"><i class="ion-ios-cart"></i></a>
-					<a class="nav-link" href="food.php"><i class="ion-log-out"></i></a>
+					<?php if(isset($_SESSION["log-in"])){ ?>
+					<a class="nav-link" name="profile" href="profile.php"><i class="ion-person"></i></a>
+					<a class="nav-link" name="cart" href="cart.php"><i class="ion-ios-cart"></i></a>
+					<form method="post">
+					<button style="background: none;border: none;" type="submit" name="log-out"><a class="nav-link"  id="log-out" ><i class="ion-log-out"></i></a></button>
+					<?php } else{?>
+					<button style="background: none;border: none;" type="submit" id="log-in" data-toggle="modal" data-target="#login"><a class="nav-link"><i class="ion-log-in"></i></a></button>
+					<?php } ?>
+				</form>
+					<?php 
+						if (isset($_POST['log-out'])) {
+							session_destroy();
+							header("refresh:0");
+						} 
+					?>
 				</li>
 			</ul>
 		</div>
 	</nav>
 </div>
+<br><br><br><br><br>
+<?php include 'login-modal.php'; ?>
+<div class="container">
+	<div class="row">
+		<?php for ($i=0; $i < count($food_select); $i++) { ?>
+			<div class="col-lg-3 col-md-3 col-sm-6 col-6" style="margin-bottom: 20px">
+				<div style="position: relative; overflow: hidden;">
+					<a title="<?php  echo $food_select[$i][1] ?>">
+						<div>
+							<img width="450px" height="340px" src="<?php  echo $food_select[$i][2] ?>">
+						</div>
+						<div style="background-image: url(//bizweb.dktcdn.net/100/372/532/themes/744930/assets/evo-tour-destinate.png?1576558299488);position: absolute; bottom: 0;  padding: 50px 10px 0px 10px; width: 100%;  color: #fff;  z-index: 999;">
+							<div><?php  echo $food_select[$i][1] ?></div>
+							<div>Price:<span> <?php  echo $food_select[$i][3] ?></span></div>
+							<button class="btn btn-primary" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+							<?php if(isset($_SESSION["admin"])){?>
+								<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+								<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+							<?php } ?>
+						</div>
+					</a>
+				</div>
+			</div>
+		<?php } ?>
+		</div>
+</div>
+
 </body>
 </html>

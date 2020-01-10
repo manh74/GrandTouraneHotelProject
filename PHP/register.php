@@ -62,13 +62,8 @@
       </div>
       <div class="social-links w3_social">
        <ul>
-         <!-- facebook -->
          <li> <a class="facebook" href="#" target="blank"><i class="fa fa-facebook"></i></a></li>
-
-         <!-- twitter -->
          <li> <a class="twitter" href="#" target="blank"><i class="fa fa-twitter"></i></a></li>
-
-         <!-- google plus -->
          <li> <a class="googleplus" href="#" target="blank"><i class="fa fa-google-plus"></i></a></li>
        </ul>
      </div>

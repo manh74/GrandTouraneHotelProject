@@ -62,11 +62,15 @@
 						</div>
 					</div>
 				</li>
-				<li class="nav-item active" style="display: flex">
+				<li class="nav-item" style="display: flex">
+					<?php if(isset($_SESSION["log-in"])){ ?>
 					<a class="nav-link" name="profile" href="profile.php"><i class="ion-person"></i></a>
 					<a class="nav-link" name="cart" href="cart.php"><i class="ion-ios-cart"></i></a>
 					<form method="post">
 					<button style="background: none;border: none;" type="submit" name="log-out"><a class="nav-link"  id="log-out" ><i class="ion-log-out"></i></a></button>
+					<?php } else{?>
+					<button style="background: none;border: none;" type="submit" id="log-in" data-toggle="modal" data-target="#login"><a class="nav-link"><i class="ion-log-in"></i></a></button>
+				<?php } ?>
 				</form>
 					<?php 
 						if (isset($_POST['log-out'])) {
@@ -99,6 +103,14 @@
 					if($_POST["email"]==$user_select[$i][3]||$_POST["email"]==$user_select[$i][4]&&$_POST["password"]==$user_select[$i][2]){
 						$_SESSION["full-name"] = $user_select[$i][1];
 						$_SESSION["log-in"] = true;
+						if($user_select[$i][6]=="admin"){
+							$_SESSION["admin"] = true;
+						}
+						else {
+							if(isset($_SESSION["admin"])){
+							session_unset($_SESSION["admin"]);
+						}
+						}
 						header("refresh:0");
 						break;
 					}
@@ -107,59 +119,7 @@
 			?>
 		</div>
 	</form>
-	<div class="modal fade" id="login" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">LOGIN</h5>
-					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">&times;</span>
-					</div>
-					<div class="modal-body">
-						<div class="login">
-							<div class="w3l_grid">
-								<form action="index.php" method="post" id="login">
-									<div class="form-group">
-										<label>Email address/Phone number:</label>
-										<input type="text" name="email"  class="form-control" id="email" placeholder="Enter email">
-									</div>
-									<div class="form-group">
-										<label>Password:</label>
-										<input type="password" name="password" id="password"  class="form-control" placeholder="Enter Password">
-									</div>
-									<div class="form-group">
-										<p class="text-center">By signing up you accept our <a href="#">Terms Of Use</a></p>
-									</div>
-									<div class="col-md-12 text-center ">
-										<button type="submit" name="log-in" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
-									</div>
-								</form>
-								<div class="col-md-12 text-center ">
-									<div class="second-section w3_section">
-										<div class="bottom-header w3_bottom">
-											<h3>OR</h3>
-										</div>
-										<div class="social-links w3_social">
-											<ul>
-												<li> <a class="facebook" href="#" target="blank"><i class="fa fa-facebook"></i></a></li>
-												<li> <a class="twitter" href="#" target="blank"><i class="fa fa-twitter"></i></a></li>
-												<li> <a class="googleplus" href="#" target="blank"><i class="fa fa-google-plus"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="bottom-text">
-										<p>No account yet?<a href="register.php">Signup</a></p>
-										<h4> <a href="forgotPassword.php">Forgot your password?</a></h4>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
+	<?php include 'login-modal.php'; ?>
 </div>
 
 <div class="container">
@@ -236,13 +196,11 @@
 											<span class="input-group-btn">
 												<button class="btn btn-spinner-up bootstrap-touchspin-up" type="button"><i class="ion-plus"></i></button>
 											</span>
+											<a class="btn btn-primary" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
 										</div> 
 									</div>
 								</div>
 							</div>
-							<br>
-							<button class="btn btn-primary">Search</button>
-							<br><br>
 						</form>
 					</div>
 				</div>
@@ -252,12 +210,14 @@
 </div>
 
 
-<div class="container" style="margin-top: 100px">
+<div class="container">
 	<div class="promo-title">
 		<a class="promo-title-a" href="">ROOM</a>
 		<div class="product-detail">
 			<div style="display: flex; justify-content: space-between;">
+				<?php if(isset($_SESSION["admin"])){?>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#btAdd">ADD NEW ROOM</button>
+					<?php } ?>
 				<div class="modal fade" id="btAdd" tabindex="-1" role="dialog" aria-labelledby="addNewRoom" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -319,7 +279,7 @@
 									<form method="post">
 										<button class="btn btn-primary"><i class="fa fa-info" aria-hidden="true"></i></button>
 										<a class="btn btn-primary" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-										<?php if(isset($_SESSION["log-in"])){?>
+										<?php if(isset($_SESSION["admin"])){?>
 											<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
 											<button class="btn btn-danger" name="room-delete" value=<?php echo $room_select[$i][0] ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
 										<?php } ?>
@@ -347,7 +307,7 @@
 							<h4 class="card-title"><?php  echo $food_select[$i][1] ?></h4>
 							<p class="card-text"><?php  echo $food_select[$i][4] ?></p>
 							<a class="btn btn-primary" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-							<?php if(isset($_SESSION["log-in"])){?>
+							<?php if(isset($_SESSION["admin"])){?>
 											<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
 											<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
 										<?php } ?>
@@ -370,7 +330,10 @@
 						<div class="desc">
 							<?php  echo $about_select[0][2] ?>
 						</div>
-						<a href="room-detail.html" class="btn btn-room">VIEW DETAILS</a>
+						<?php if(isset($_SESSION["admin"])){?>
+						<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+					<?php } ?>
+
 
 					</div>
 				</div>
@@ -392,14 +355,13 @@
 						<div class="desc">
 							<?php  echo $about_select[1][2] ?>
 						</div>
-						<a href="room-detail.html" class="btn btn-room">VIEW DETAILS</a>
+						<?php if(isset($_SESSION["admin"])){?>
+						<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+					<?php } ?>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
-
 		<div class="container">
 			<hr>
 			<section class="dark-grey-text">
@@ -413,7 +375,7 @@
 						<div>
 							<h3 class="font-weight-bold mb-4"><?php echo $cmt_select[0][1] ?></h3>
 							<p><?php echo $cmt_select[0][3] ?></p>
-							<button type="button" class="btn btn-info">Review</button>
+							<button type="button" class="btn btn-info">REVIEW OUR HOTEL</button>
 
 						</div>
 					</div>
@@ -425,15 +387,6 @@
 	</div>
 </div>
 </div>
-
-
-
-
-
-
-
-
-
 <div style="text-align: center;">
 	<iframe width="1100px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7668.363145003428!2d108.2432655256638!3d16.056064865898332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217789c990369%3A0x138c794439bb7874!2sGrand%20Tourane%20Hotel!5e0!3m2!1svi!2s!4v1577967763229!5m2!1svi!2s" width="2000" height="450" frameborder="0" allowfullscreen></iframe>
 </div>
