@@ -395,6 +395,7 @@
 <div style="text-align: center;">
 	<iframe width="1100px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7668.363145003428!2d108.2432655256638!3d16.056064865898332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217789c990369%3A0x138c794439bb7874!2sGrand%20Tourane%20Hotel!5e0!3m2!1svi!2s!4v1577967763229!5m2!1svi!2s" width="2000" height="450" frameborder="0" allowfullscreen></iframe>
 </div>
+<div class="container">
 <footer class="footer-sky">
 	<div class="footer-top">
 		<div class="container">
@@ -442,5 +443,6 @@
 	</div>
 </section>
 </form>
+</div>
 </body>
 </html>

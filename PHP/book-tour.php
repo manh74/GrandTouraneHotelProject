@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<title>Social Hotel</title>
-	<link REL="SHORTCUT ICON" HREF="img/logo.jpg">
-	<link rel="stylesheet" type="text/css" href="CSS/style.css">
+	<link REL="SHORTCUT ICON" HREF="../img/logo.jpg">
+	<link rel="stylesheet" type="text/css" href="../CSS/style.css">
 	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script
@@ -223,7 +223,7 @@
 			</div>
 			--
 		</div>
-	</div>
+	
 
 	<section class="copyright">
 		<div class="container">
@@ -236,5 +236,6 @@
 			</div>
 		</div>
 	</section>
+	</div>
 </body>
 </html>

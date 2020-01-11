@@ -140,6 +140,7 @@ for($i = 0; $i < count($room_select); $i++){
 <?php } }?>
 </div>
 <br>
+<div class="container">
 <section class="copyright">
         <div class="container">
             <div class="row">
@@ -151,6 +152,7 @@ for($i = 0; $i < count($room_select); $i++){
             </div>
         </div>
     </section>
+</div>
     
 </body>
 </html>
