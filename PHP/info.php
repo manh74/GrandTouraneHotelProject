@@ -108,5 +108,28 @@
 </section> 
 </div>
 </div>
+
+<div class="container">
+		<div class="row" style="border: 1px solid red">
+			<?php for ($i=0; $i < count($about_select); $i++) { ?>
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<div>
+					<h2 style="text-transform: uppercase;">
+						<p>
+							<span style="color: #ff5722"><?php echo $about_select[$i][1] ?></span>
+						</p>
+					</h2>
+				</div>
+				<div>
+					<?php echo $about_select[$i][2] ?>
+				</div>
+			</div>
+			<br>
+		<?php } ?>
+		</div>
+	</div>
+
+
+
 </body>
 </html>

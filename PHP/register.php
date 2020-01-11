@@ -18,9 +18,16 @@
   <script src="../JS/js.js" type="text/javascript"></script>
 </head>
 <body class="bg">
+  <?php 
+  session_start();
+  include 'connect.php'; 
+  if (isset($_SESSION["log-in"])) {
+    header("location:index.php");
+  }
+  else {
+ ?>
   <form method="post">
   <div class="login-form">
-    <!--  Title-->
     <div class="login-title">
      <h1>Grand Tourane Hotel</h1>
    </div>
@@ -40,19 +47,46 @@
         <input type="text" name="phone"  class="form-control" id="email" placeholder="Enter phone number">
       </div>
       <div class="form-group">
-        <label>Bỉthday:</label>
+        <label>Birthday:</label>
         <input type="date" name="date"  class="form-control" id="date" placeholder="Enter birthday">
       </div>
       <div class="form-group">
         <label>Password:</label>
-        <input type="password" name="password" id="password"  class="form-control" placeholder="Enter Password">
+        <input type="password" name="password" id="password"  class="form-control" placeholder="Enter password">
+      </div>
+      <div class="form-group">
+        <label>Re-password:</label>
+        <input type="password" name="re-password" id="re-password"  class="form-control" placeholder="Enter password one more time!">
       </div>
       <div class="form-group">
         <p class="text-center">By creating an account you agree to our <a href="#">Terms Of Use</a></p>
       </div>
       <div class="col-md-12 text-center ">
-        <button type="submit" name="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Register</button>
+        <button type="submit" name="rgt" class=" btn btn-block mybtn btn-primary tx-tfm">Register</button>
       </div>
+      <?php 
+      if (isset($_POST["rgt"])) {
+        if(isset($_POST["fullName"])&&isset($_POST["phone"])&&isset($_POST["date"])&&isset($_POST["email"])&&isset($_POST["password"])&&isset($_POST["re-password"])){
+        if ($_POST["password"]!=$_POST["re-password"]) {
+      ?>
+      <script>alert("Repassword have problem!")</script>
+      <?php
+        }
+        else{
+          $user_insert = "INSERT INTO users (fullName,password,email,phone,birthday) values ('".$_POST["fullName"]."','".$_POST["password"]."','".$_POST["email"]."','".$_POST["phone"]."','".$_POST["date"]."')";
+          $db->query($user_insert);
+          ?>
+          <script>alert("Register's succesful!")</script>
+          <?php
+          header("Location:login.php");
+        }
+      }
+      else if(!isset($_POST["fullName"])||!isset($_POST["phone"])||!isset($_POST["date"])||!isset($_POST["email"])||!isset($_POST["password"])||!isset($_POST["re-password"])){
+        ?>
+        <script>alert("Please enter all form!")</script>
+        <?php
+      } }?>
+      
       <div class="form-group">
         <p class="text-center">You have account? <a href="login.php" id="login">Log in here</a></p>
       </div>
@@ -78,20 +112,7 @@
 
 </div>
 </form>
-
-<?php 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "myhotel";
-
-$db = new mysqli($servername, $username, $password, $database);
-if (isset($_POST["submit"])) {
-   $user_insert = "INSERT INTO Users (fullName,password,email,phone,birthday) VALUES ('".$_POST["fullName"]."','".$_POST["password"]."','".$_POST["email"]."','".$_POST["phone"]."','".$_POST["date"]."')";
-   echo $user_insert;
-    $db->query($user_insert);
- }
-?>
+<?php } ?>
 
 
 </body>

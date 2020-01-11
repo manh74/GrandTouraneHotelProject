@@ -215,8 +215,8 @@
 							<img src="//bizweb.dktcdn.net/100/372/532/themes/744930/assets/evo_tour_destination_image_1.jpg?1576827284843">
 						</div>
 						<div style="background-image: url(//bizweb.dktcdn.net/100/372/532/themes/744930/assets/evo-tour-destinate.png?1576558299488);position: absolute; bottom: 0;  padding: 50px 10px 10px 10px; width: 100%;  color: #fff;  z-index: 999;">
-							<div class="destination-name">Vịnh Hạ Long</div>
-							<div class="destination-like">Đã có <span>1,600 +</span> lượt khách</div>
+							<div>Vịnh Hạ Long</div>
+							<div>Đã có <span>1,600 +</span> lượt khách</div>
 						</div>
 					</a>
 				</div>

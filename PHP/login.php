@@ -10,15 +10,22 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
+  <?php 
+  session_start();
+  include 'connect.php'; 
+  if (isset($_SESSION["log-in"])) {
+    header("location:index.php");
+  }
+  else {
+ ?>
   <div class="login-form">
-    <!--  Title-->
     <div class="login-title">
      <h1>Grand Tourane Hotel</h1>
    </div>
    <div class="login w3_login">
     <h2 class="login-header w3_header">LOG IN</h2>
     <div class="w3l_grid">
-      <form action="" method="post" id="login">
+      <form action="index.php" method="post" id="login">
               <div class="form-group">
                 <label>Email address/Phone number:</label>
                 <input type="email" name="email"  class="form-control" id="email" placeholder="Enter email">
@@ -31,7 +38,7 @@
                 <p class="text-center">By signing up you accept our <a href="#">Terms Of Use</a></p>
               </div>
               <div class="col-md-12 text-center ">
-                <button type="submit" name="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
+                <button type="submit" name="log-in" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
               </div>
             </form>
       <div class="col-md-12 text-center ">
@@ -63,5 +70,6 @@
 </div>
 
 </div>
+<?php } ?>
 </body>
 </html>

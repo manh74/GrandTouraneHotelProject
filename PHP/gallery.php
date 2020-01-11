@@ -87,31 +87,43 @@
 <?php include 'login-modal.php'; ?>
 <br><br><br><br><br>
 <div class="container">
-	<h2 style="    display: block;
-	position: relative;
-	margin: 0;
-	margin-bottom: 35px;
-	padding: 0;
-	text-align: center;">
-	<span style="display: inline-block;
-	background: #fff;
-	padding: 0 20px;
+	<center>
+	<span style="padding: 0 20px;
 	font-family: 'FontTitle';
 	font-size: 32px;
 	font-weight: 700;
 	position: relative;
 	color: #303f39;
 	text-transform: uppercase;">ALL PHOTO</span>
+	<?php if(isset($_SESSION["admin"])){?>
+		<br>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload">Upload</button>
+		<br>
+	<?php } ?>
+</center>
+<br>
 
 <div class="row" style="background: none">
     	<div class="col-xs-12">
             <div class="row"> 
             	<?php for ($i=0; $i < count($gallerys); $i++) { ?>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 20px;">
-                    	<img style="height: 300px; width: 400px; position: relative;" src="<?php echo $gallerys[$i][1] ?>">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 5px;">
+                    	<div style="position: relative; overflow: hidden;">
+					<a title="<?php echo $gallerys[$i][1] ?>">
+						<div>
+							<img style="height: 300px; width: 400px; position: relative;" src="<?php echo $gallerys[$i][2] ?>">
+						</div>
+						<div style="background-image: url(//bizweb.dktcdn.net/100/372/532/themes/744930/assets/evo-tour-destinate.png?1576558299488);position: absolute; bottom: 0;  padding: 50px 10px 0px 10px; width: 100%;  color: #fff;  z-index: 999;">
+							<div><?php echo $gallerys[$i][1] ?></div>
+							<div>Time upload:<span> <?php echo $gallerys[$i][3] ?></span></div>
+							<?php if(isset($_SESSION["admin"])){?>
+								<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+							<?php } ?>
+						</div>
+					</a>
+				</div>
                 	</div>
-                <?php } ?>
-                               
+                <?php } ?>               
                 </div>
                             </div>
         </div>

@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<title>Food</title>
-	<link REL="SHORTCUT ICON" HREF="img/logo.jpg">
-	<link rel="stylesheet" type="text/css" href="CSS/style.css">
+	<link REL="SHORTCUT ICON" HREF="../img/logo.jpg">
+	<link rel="stylesheet" type="text/css" href="../CSS/style.css">
 	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script
@@ -87,6 +87,20 @@
 <br><br><br><br><br>
 <?php include 'login-modal.php'; ?>
 <div class="container">
+	<center>
+	<span style="padding: 0 20px;
+	font-family: 'FontTitle';
+	font-size: 32px;
+	font-weight: 700;
+	position: relative;
+	color: #303f39;
+	text-transform: uppercase;">FOOD</span>
+	<?php if(isset($_SESSION["admin"])){?>
+		<br>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newFood">ADD NEW FOOD</button>
+	<?php } ?>
+	</center>
+	<br>
 	<div class="row">
 		<?php for ($i=0; $i < count($food_select); $i++) { ?>
 			<div class="col-lg-3 col-md-3 col-sm-6 col-6" style="margin-bottom: 20px">
@@ -109,7 +123,19 @@
 			</div>
 		<?php } ?>
 		</div>
-</div>
 
+
+<section class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 ">
+					<div class="text-center text-white">
+						&copy; 2019 - Design by Nguyen Manh. All Rights Reserved.
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</div>
 </body>
 </html>

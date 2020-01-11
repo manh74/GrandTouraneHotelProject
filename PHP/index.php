@@ -297,6 +297,11 @@
 	<div class="container">
 		<div class="promo-title">
 		<a class="promo-title-a" href="food.php">FOOD</a>
+		<br>
+		<?php if(isset($_SESSION["admin"])){?>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#btAddFood">ADD NEW FOOD</button>
+				<br>
+					<?php } ?>
 		<div class="row">
 			<?php for ($i=0; $i < count($food_select); $i++) { ?>	
 				<div class="col-md-4">
@@ -320,7 +325,7 @@
 </div>
 	<br>
 	<br>
-	<div class="container">
+	<div class="container" style="justify-content: center">
 		<hr>
 		<div class="row">
 			<div style="display: flex; justify-content: space-between; width: 2000px">
