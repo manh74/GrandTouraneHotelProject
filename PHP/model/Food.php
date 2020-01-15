@@ -1,10 +1,10 @@
-<!-- <?php 
-public class Food {
-	protected $id;
-	protected $name;
-	protected $image;
-	protected $price;
-	protected $info;
+<?php 
+ class Food{
+	public $id;
+	public $image;
+	public $name;
+	public $price;
+	public $info;
 
 
 	public function __construct($id, $name, $image, $price, $info) {
@@ -16,4 +16,3 @@ public class Food {
   	}
 }
  ?>
- -->

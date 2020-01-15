@@ -2,7 +2,7 @@ drop database if exists myhotel;
 create database myhotel;
 use myhotel;
 
-create table Users(
+create table user(
 	id int auto_increment primary key,
     fullName varchar(255),
     password varchar(255),
@@ -12,29 +12,32 @@ create table Users(
     roll varchar(255) default "user"
 );
 
-insert into Users values
+insert into user values
 	(1,"Nguyen Manh","12345","manh.nguyen21@gmail.com","0336908087","2000/05/14","admin"),
     (2,"Nguyen Van Linh","678910","linh@gmail.com","036745121","1998/12/14","admin");
   
-  select * from Users;
+  select * from User;
+  
+  
+  
     
-    create table rooms(
+    create table room(
 		id int auto_increment primary key,
         image varchar(255),
 		name varchar(255),
-        price varchar(255),
+        price double,
         max varchar(255),
         rate varchar(255)
 	);
     
-    insert into rooms values
-    (1,"https://media-cdn.tripadvisor.com/media/photo-s/09/70/7a/7e/muong-thanh-luxury-nhat.jpg","VIP","320000","4 person","5"),
-(2,"http://landing.engotheme.com/html/skyline/demo/images/Home-2/rooms-1.jpg","VIP","320000","4 person","5"),
-    (3,"https://www.chudu43.com/wp-content/uploads/2019/03/Grand-Tourane-Hotel-Da-Nang-1.jpg","VIP","320000","2 person","5"),
-    (4,"https://aff.bstatic.com/images/hotel/max500/166/166181203.jpg","VIP","320000","1 person","5"),
-    (5,"https://m.justgola.com/media/a/00/19/105495_og_1.jpeg","VIP","3245000","2 person","5"),
-    (6,"http://villadulich.vn/public/uploads/du-an/chi-tiet/Kh%C3%A1ch%20s%E1%BA%A1n%20Grand%20Tourane/111216833.jpg","VIP","320000","2 person","5");
-    
+    insert into room values
+    (1,"https://media-cdn.tripadvisor.com/media/photo-s/09/70/7a/7e/muong-thanh-luxury-nhat.jpg","VIP",320000,"4 person","5"),
+(2,"http://landing.engotheme.com/html/skyline/demo/images/Home-2/rooms-1.jpg","VIP",320000,"4 person","5"),
+    (3,"https://www.chudu43.com/wp-content/uploads/2019/03/Grand-Tourane-Hotel-Da-Nang-1.jpg","VIP",320000,"2 person","5"),
+    (4,"https://aff.bstatic.com/images/hotel/max500/166/166181203.jpg","VIP",320000,"1 person","5"),
+    (5,"https://m.justgola.com/media/a/00/19/105495_og_1.jpeg","VIP",3245000,"2 person","5"),
+    (6,"http://villadulich.vn/public/uploads/du-an/chi-tiet/Kh%C3%A1ch%20s%E1%BA%A1n%20Grand%20Tourane/111216833.jpg","VIP",320000,"2 person","5"),
+    (7,"http://villadulich.vn/public/uploads/du-an/chi-tiet/Kh%C3%A1ch%20s%E1%BA%A1n%20Grand%20Tourane/111216833.jpg","a",1210000,"24 person","5");
     
     create table about(
 		id int auto_increment primary key,
@@ -61,7 +64,7 @@ insert into Users values
 - Apply the highest standards of excellence to each service we bring to customers."),
     (3,"Mission","- To establish <strong>Grand Tourane Hotel</strong> as a premier hospitality property while maintaining our consistent principles as we grow.<br>- Develop enthusiastically&nbsp;satisfied and loyal customers&nbsp;at every contact.<br>- Recognize that&nbsp;profitability&nbsp;is essential to our future success.<br>- Contribute positively to our team development & their pride of the Owning Company, Property.");
     
-    create table foods(
+    create table food(
      id int auto_increment primary key,
      name varchar(255),
      image varchar(255),
@@ -69,7 +72,8 @@ insert into Users values
      info varchar(255)
      );
      
-     insert into foods values 
+     
+     insert into food values 
      (3,"Chicken3","https://dtlscuh0h90jk.cloudfront.net/seller/photos/VNGFVN0000004c_8a9a80ff994847f8a6369060880a22c2.jpg",190000,"ABCVAVVAV"),
      (6,"Chicken3","https://dtlscuh0h90jk.cloudfront.net/seller/photos/VNGFVN0000004c_8a9a80ff994847f8a6369060880a22c2.jpg",190000,"ABCVAVVAV"),
      (5,"Chicken3","https://dtlscuh0h90jk.cloudfront.net/seller/photos/VNGFVN0000004c_8a9a80ff994847f8a6369060880a22c2.jpg",190000,"ABCVAVVAV"),
@@ -79,36 +83,50 @@ insert into Users values
      (2,"Chicken2","https://i.ndtvimg.com/i/2016-07/chicken-korma_625x350_71467713811.jpg",190000,"ABCVAVVAV"),
      (4,"Chicken4","https://donchicken.vn/pub/media/wysiwyg/home_page/friedchicken.png",190000,"ABCVAVVAV"),
      (1,"Chicken1","https://www.cdc.gov/foodsafety/images/SalmonellaChicken_456px.jpg",190000,"ABCVAVVAV");
+create table cart(
+     id int auto_increment primary key,
+     userId int,
+     productId int,
+     productName varchar(255),
+     quantity int,
+     price int,
+     type varchar(255)
+     );
+     
+     insert into cart values
+(1,2,1,"Chicken1",2,380000,"food");
 
-create table forgives(
+select * from cart;
+     
+create table forgive(
 	id int auto_increment primary key,
      title varchar(255),
      content varchar(255)
      );
      
-insert into forgives values
+insert into forgive values
 (1,"Best price guarantee","We guarantee our customers will get the best service, the most attractive promotions"),
 (2,"Trust service - True value","Putting our customers' interests first, we support our customers the fastest and most accurate service with reliable and authentic value services."),
 (3,"Quality assurance","We work closely with our partners, conducting periodic surveys to ensure the best quality of service");
- create table comments(
+ create table comment(
      id int auto_increment primary key,
      name varchar(255),
      email varchar(255),
      content varchar(255)
      );
      
-     insert into comments values
+     insert into comment values
      (1,"Pham Van Hai","haivan@gmail.com","The best hotel that I have been");
      
      
-     create table gallerys(
+     create table gallery(
 		id int auto_increment primary key,
         title varchar(255),
         image varchar(255),
         timeUpdate date
         );
         
-        insert into gallerys values
+        insert into gallery values
      (1,"Grand","https://pix5.agoda.net/hotelimages/115/1158339/1158339_16092913540047106093.jpg?s=800x","2019-12-16"),
       (2,"Grand","https://dinco.com.vn/wp-content/uploads/2019/03/28.jpg","2019-12-26"),
        (3,"Grand","https://i.vnbooking.com/optimg/hotel/2535_99117.jpg","2019-02-16"),
@@ -120,7 +138,7 @@ insert into forgives values
      
      
      
-     create table tours(
+     create table tour(
 		id int auto_increment primary key,
 		 name varchar(255),
 		 image varchar(255),
@@ -129,13 +147,24 @@ insert into forgives values
          price double
 		);
         
-        insert into tours values
+        insert into tour values
         (1,"Travel to Italia","//bizweb.dktcdn.net/thumb/large/100/372/532/products/vistas-canal-venecia.jpg?v=1575555979000","On Monday everday week","6 days 5 nights",16000000),
         (2,"Travel to Da Nang","https://mytourcdn.com/upload_images/Image/Location/24_10_2016/11/du-lich-quan-3-da-nang-mytour-1.jpg","On Monday everday week","6 days 5 nights",3500000);
         
         
-        create table favorites(
+        create table favorite(
 		 id int auto_increment primary key,
 		 name varchar(255),
 		 image varchar(255)
          );
+         
+         create table booking(
+		 id int auto_increment primary key,
+		 checkIn date,
+		 checkOut date,
+         type varchar(255),
+         adults int,
+         children int,
+         userId int 
+         );
+         select * from booking;
