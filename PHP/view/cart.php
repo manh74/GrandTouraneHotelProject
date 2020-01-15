@@ -50,11 +50,11 @@
 				<li class="nav-item">
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">
 						<div class="textbox">
-							<form class="form-inline">
+							<form class="form-inline" method="post" action="result.php">
 								<div class="form-group">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search something..">
-										<button class="btn btn-secondary" type="button">
+										<input type="text" name="search-input" class="form-control" placeholder="Search something..">
+										<button class="btn btn-secondary" name="search-button" type="submit">
 											<i class="ion-ios-search-strong"></i>
 										</button>
 									</div>
@@ -87,9 +87,48 @@
 	<br><br><br><br><br>
 	<div class="container">
 
-		<?php if(isset($_SESSION['admin'])){?>
-			<div>Admin</div>
+		<?php if(isset($_SESSION['admin'])){
+		?>
+		Hello <b style="color: blue"><?php echo $_SESSION['full-name'] ?></b> - Admin
+<div class="promo-title">
+				<a class="promo-title-a" href="">LIST OF CUSTOMER WAITING</a>
+				<form method="post" action=""> 
+					
+					<table border="1px" align="center"> 
+						
+						<tr> 
+							<th>Name</th> 
+							<th>Quantity</th> 
+							<th>Price</th> 
+							<th>Action</th> 
+						</tr>
 
+						<?php 
+						$_SESSION['total-price-room'] = 0;
+						for ($i=0; $i < count($room_cart_select); $i++) { ?> 
+							<tr> 
+								<td><?php echo  $room_cart_select[$i]['productName'] ?></td> 
+								<td><input type="text" size="5" value="<?php echo  $_SESSION['room-quantity'] = $room_cart_select[$i]['quantity'] ?>"></td> 
+								<td name="price" value="<?php echo  $room_cart_select[$i]['price'] ?>"><?php echo  $_SESSION['room-price'] = $room_cart_select[$i]['price'] ?></td> 
+								<td>
+									<button type="submit" name="remove-cart" value="<?php echo $room_cart_select[$i]['id'] ?>">Remove</button>
+									<button type="submit" name="update">UPDATE</button>
+								</td> 
+							</tr>
+							<?php 
+							$_SESSION['total-price-room']  +=  $_SESSION['room-price']*$_SESSION['room-quantity'];
+						} ?>
+						<tr> 
+							<td colspan="4">Total Price: <?php echo  $_SESSION['total-price-room'] ?></td> 
+						</tr> 
+						
+					</table> 
+					<br />
+					
+					
+				</form> 
+				<br /> 
+			</div>
 
 		<?php } else { ?>
 			<h1>View cart</h1> 

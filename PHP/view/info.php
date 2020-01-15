@@ -109,14 +109,18 @@
 </div>
 </div>
 
-<div class="container">
-	<div class="row" style="border: 1px solid red">
+<div class="container" id="show">
+	<div class="row border border-success">
 		<?php for ($i=0; $i < count($about_select); $i++) { ?>
 			<div class="col-xs-12 col-sm-12 col-md-12">
 				<div>
 					<h2 style="text-transform: uppercase;">
 						<p>
-							<span style="color: #ff5722"><?php echo $about_select[$i]["title"] ?></span>
+							<form method="post">
+								<span class="col-md-6" style="color: #ff5722"><?php echo $about_select[$i]["title"] ?></span>
+								<button class="btn btn-info"  name="about-edit" value="<?php echo $about_select[$i]["id"]?>"><i class="fa fa-edit" aria-hidden="true"></i></button>
+								<button class="btn btn-danger" name="about-delete" value=<?php echo $about_select[$i]["id"] ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+							</form>
 						</p>
 					</h2>
 				</div>
@@ -129,32 +133,37 @@
 	</div>
 </div>
 <br>
+<?php include 'edit-about-form.php'; ?>
+<br>
 
-<div class="container">
+<div lass="container border border-danger">
 	<div class="row" style="justify-content: center">
 		<div class="col-sm-6 col-sm-offset-3">
 			<h3>Give us a feedback</h3>
-			<form role="form" id="contactForm">
+			<form method="post">
 				<div class="row">
 					<div class="form-group col-sm-6">
 						<label style="size: 15px">Name</label>
-						<input type="text" class="form-control" id="name" placeholder="Enter name" required>
+						<input type="text" class="form-control" id="name" placeholder="Enter name" name="names" required>
 					</div>
 					<div class="form-group col-sm-6">
 						<label tyle="size: 15px">Email</label>
-						<input type="email" class="form-control" id="email" placeholder="Enter email" required>
+						<input type="email" class="form-control" id="email" placeholder="Enter email" name="emails" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label tyle="size: 15px">Message</label>
-					<textarea id="message" class="form-control" rows="5" placeholder="Enter your message" required></textarea>
+					<textarea id="message" class="form-control" rows="5" placeholder="Enter your message" name="msg" required></textarea>
 				</div>
-				<button type="submit" id="form-submit" class="btn btn-success btn-lg pull-right ">Submit</button>
+				<button type="submit" name="send-feedback" class="btn btn-success btn-lg pull-right ">Submit</button>
 			</form>
 		</div>
 	</div>
-	<?php include 'footer.php'; ?>
 </div>
-
+<br>
+<div class="container">
+	<?php include 'footer.php';
+	?>
+</div>
 </body>
 </html>

@@ -187,11 +187,14 @@
 												<option>3</option>
 												<option>4</option>
 											</select>
+											&emsp;
 											<button type="submit" class="btn btn-primary" name="book-room" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
 										</div> 
 									</div>
 								</div>
+								<br>
 							</div>
+							<br>
 						</form>
 					</div>
 				</div>
@@ -199,94 +202,46 @@
 		</div>
 	</div>
 </div>
-
-<?php if (isset($_POST['book-room'])) {
-	$book_room_sql = "INSERT INTO booking (checkIn,checkOut,type,adults,children,userId) VALUES('".$_POST["check-in"]."','".$_POST["check-out"]."','".$_POST["type"]."','".$_POST["adults"]."','".$_POST["child"]."','".$_SESSION["id"]."')";
-	$db->query($book_room_sql);
-} ?>
-
 <form method="post">
 	<div class="container">
 		<div class="promo-title">
-			<a class="promo-title-a" href="">ROOM</a>
-			<div class="product-detail">
-				<div style="display: flex; justify-content: space-between;">
-					<?php if(isset($_SESSION["admin"])){?>
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#btAdd">ADD NEW ROOM</button>
-					<?php } ?>
-					<div class="modal fade" id="btAdd" tabindex="-1" role="dialog" aria-labelledby="addNewRoom" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="addNewRoom">ADD NEW ROOM</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<div class="form-group">
-										
-									</div>
-									<div class="form-group">
-										<label for="new-name">Name:</label>
-										<input type="text" class="form-control" placeholder="Enter name" id="new-name">
-									</div>
-									<div class="form-group">
-										<label for="new-name">Max:</label>
-										<select>
-											<option value="volvo">1</option>
-											<option value="saab">2</option>
-											<option value="mercedes">3</option>
-											<option value="audi">4</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label for="new-name">Price:</label>
-										<input type="text" class="form-control" placeholder="Enter price" id="new-price">
-									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary" onclick="addNewRoom()" name="new-room">Add</button>
-								</div>
-							</div>
+			<a class="promo-title-a" href="room-rate.php">ROOM</a>
+			<br>
+			<?php include 'add-room-modal.php'; ?>
+
+			<div class="row">
+				<?php for($i = 0; $i < count($rooms); $i++){
+					?>
+					<div class="col-12 col-sm-6 col-md-4 col-lg-3" style="border: 1px solid #e8e2d3">
+						<div>
+							<img width="240px" height="200" src="<?php echo $rooms[$i]->image ?>"alt="<?php echo $rooms[$i]->name ?>"></a>
+						</div>
+						<div class="text">
+							<h2><a href="room-detail.html"><?php echo $rooms[$i]->name ?></a></h2>
+							<ul>
+								<li><i class="fa fa-child" aria-hidden="true"></i> <?php echo $rooms[$i]->max ?></li>
+								<li><i class="fa fa-money" aria-hidden="true"></i> <?php echo $rooms[$i]->price ?></li>
+								<li><i class="fa fa-star-o" style="color: yellow" aria-hidden="true"></i> <?php echo $rooms[$i]->rate ?></li>
+							</ul>
+							<form method="post">
+								<button class="btn btn-primary" type="submit" name="info-room" value="<?php echo $rooms[$i]->id ?>"><i class="fa fa-info" aria-hidden="true"></i></button>
+								<button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $rooms[$i]->id ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
+								<?php if(isset($_SESSION["admin"])){?>
+									<button type="submit" name="edit-room" value="<?php echo $rooms[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+									<button class="btn btn-danger" name="room-delete" value=<?php echo $rooms[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+								<?php } ?>
+							</form>
 						</div>
 					</div>
-				</div>
+				<?php } 
 
-				<div class="row">
-					<?php for($i = 0; $i < count($rooms); $i++){
-						?>
-						<div class="col-12 col-sm-6 col-md-4 col-lg-3" style="border: 1px solid #e8e2d3">
-							<div>
-								<a href="room-detail.html"><img width="240px" height="200" src="<?php echo $rooms[$i]->image ?>"alt="#"></a>
-							</div>
-							<div class="text">
-								<h2><a href="room-detail.html"><?php echo $rooms[$i]->name ?></a></h2>
-								<ul>
-									<li><i class="fa fa-child" aria-hidden="true"></i> <?php echo $rooms[$i]->max ?></li>
-									<li><i class="fa fa-money" aria-hidden="true"></i> <?php echo $rooms[$i]->price ?></li>
-									<li><i class="fa fa-star-o" style="color: yellow" aria-hidden="true"></i> <?php echo $rooms[$i]->rate ?></li>
-								</ul>
-								<form method="post">
-									<button class="btn btn-primary"><i class="fa fa-info" aria-hidden="true"></i></button>
-									<button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $rooms[$i]->id ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
-									<?php if(isset($_SESSION["admin"])){?>
-										<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
-										<button class="btn btn-danger" name="room-delete" value=<?php echo $rooms[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
-									<?php } ?>
-								</form>
-							</div>
-						</div>
-					<?php } 
-					
-
-					?>
-				</div>
+				?>
 			</div>
 		</div>
 	</div>
+</div>
 </form>
+<?php include 'edit-room-form.php'; ?>
 <br>
 <br>
 <form method="post">
@@ -297,7 +252,9 @@
 			<?php if(isset($_SESSION["admin"])){?>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#btAddFood">ADD NEW FOOD</button>
 				<br>
-			<?php } ?>
+			<?php } 
+			include 'add-food-modal.php';?>
+			
 			<div class="row">
 				<?php for ($i=0; $i < count($foods); $i++) { ?>	
 					<div class="col-md-4">
@@ -306,13 +263,12 @@
 							alt="<?php  echo $foods[$i]->name ?>">
 							<div class="card-body">
 								<h4 class="card-title"><?php  echo $foods[$i]->name ?></h4>
-								<p class="card-text"><?php  echo $foods[$i]->price ?></p>
+								<p class="card-text"><?php  echo number_format($foods[$i]->price)."VND" ?></p>
 								<button class="btn btn-primary" type="submit" name="cart" value=<?php  echo $foods[$i]->id ?> style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
 								<?php if(isset($_SESSION["admin"])){?>
-									<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
-									<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
-								<?php }
-								?>
+									<button type="submit" name="edit-food" value="<?php echo $foods[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+									<button class="btn btn-danger" name="food-delete" value=<?php echo $foods[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+								<?php } ?>
 							</div>
 						</div>
 					</div>								
@@ -322,49 +278,53 @@
 		</div>
 	</div>
 </form>
+<?php include 'edit-food-form.php'; ?>
 <br>
 <br>
 <div class="container" style="justify-content: center">
 	<hr>
 	<div class="row">
-		<div style="display: flex; justify-content: space-between; width: 2000px">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 no-padding-left">
-				<div class="text">
-					<h2 class="heading"><?php  echo $about_select[0]['title'] ?></h2>
-					<div class="desc">
-						<?php  echo $about_select[0]['content'] ?>
+		<?php if (isset($about_select[0])) {?>
+			<div style="display: flex; justify-content: space-between; width: 2000px">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 no-padding-left">
+					<div class="text">
+						<h2 class="heading"><?php  echo $about_select[0]['title'] ?></h2>
+						<div class="desc">
+							<?php  echo $about_select[0]['content'] ?>
+						</div>
+						<?php if(isset($_SESSION["admin"])){?>
+							<button class="btn btn-info"  name="about-edit" value="<?php echo $about_select[0]["id"]?>"><i class="fa fa-edit" aria-hidden="true"></i></button>
+						<?php } ?>
 					</div>
-					<?php if(isset($_SESSION["admin"])){?>
-						<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
-					<?php } ?>
-
-
 				</div>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  no-padding-right col-lg-push-6 col-md-push-6 ">
-				<div class="img">
-					<img src="https://dinco.com.vn/wp-content/uploads/2019/03/28.jpg" width="550px" height="400px">
-				</div>
-			</div>
-		</div>
-		<div style="display: flex">
-			<div class="col-xss-12 col-xs-6 col-sm-6">
-				<div class="img">
-					<img src="https://pix10.agoda.net/hotelImages/1158339/-1/889f782f885aada574dc862fd83c3c5f.jpg?s=1024x768" width="550px">
-				</div>
-			</div>
-			<div class="col-xss-12 col-xs-6 col-sm-6">
-				<div class="text">
-					<h2 class="heading"><?php  echo $about_select[1]['title'] ?></h2>
-					<div class="desc">
-						<?php  echo $about_select[1]['content'] ?>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  no-padding-right col-lg-push-6 col-md-push-6 ">
+					<div class="img">
+						<img src="https://dinco.com.vn/wp-content/uploads/2019/03/28.jpg" width="550px" height="400px">
 					</div>
-					<?php if(isset($_SESSION["admin"])){?>
-						<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
-					<?php } ?>
 				</div>
 			</div>
-		</div>
+		<?php } if (isset($about_select[1])) { ?>
+			<div style="display: flex">
+				<div class="col-xss-12 col-xs-6 col-sm-6">
+					<div class="img">
+						<img src="https://pix10.agoda.net/hotelImages/1158339/-1/889f782f885aada574dc862fd83c3c5f.jpg?s=1024x768" width="550px">
+					</div>
+				</div>
+				<div class="col-xss-12 col-xs-6 col-sm-6">
+					<div class="text">
+						<h2 class="heading"><?php  echo $about_select[1]['title'] ?></h2>
+						<div class="desc">
+							<?php  echo $about_select[1]['content'] ?>
+						</div>
+						<?php if(isset($_SESSION["admin"])){?>
+							<button class="btn btn-info"  name="about-edit" value="<?php echo $about_select[1]["id"]?>"><i class="fa fa-edit" aria-hidden="true"></i></button>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php include 'edit-about-form.php'; ?>
+		<br><br>
 	</div>
 	<div class="container">
 		<hr>
@@ -377,9 +337,9 @@
 				</div>
 				<div class="col-md-5 d-flex align-items-center">
 					<div>
-						<h3 class="font-weight-bold mb-4"><?php echo $cmt_select[0]['name'] ?></h3>
-						<p><?php echo $cmt_select[0]['content'] ?></p>
-						<button type="button" class="btn btn-info">REVIEW OUR HOTEL</button>
+						<h3 class="font-weight-bold mb-4"><?php echo $cmt_select[count($cmt_select)-1]['name'] ?></h3>
+						<p><?php echo $cmt_select[count($cmt_select)-1]['content'] ?></p>
+						<a href="info.php"><button type="button" class="btn btn-info">REVIEW OUR HOTEL</button></a>
 
 					</div>
 				</div>

@@ -14,7 +14,8 @@ create table user(
 
 insert into user values
 	(1,"Nguyen Manh","12345","manh.nguyen21@gmail.com","0336908087","2000/05/14","admin"),
-    (2,"Nguyen Van Linh","678910","linh@gmail.com","036745121","1998/12/14","admin");
+    (2,"Phan Van Linh","678910","linh@gmail.com","036745121","1997/12/14","admin"),
+    (3,"Tran Ngoc Minh","678910","minh@gmail.com","0765212321","1999/02/14","user");
   
   select * from User;
   
@@ -39,6 +40,7 @@ insert into user values
     (6,"http://villadulich.vn/public/uploads/du-an/chi-tiet/Kh%C3%A1ch%20s%E1%BA%A1n%20Grand%20Tourane/111216833.jpg","VIP",320000,"2 person","5"),
     (7,"http://villadulich.vn/public/uploads/du-an/chi-tiet/Kh%C3%A1ch%20s%E1%BA%A1n%20Grand%20Tourane/111216833.jpg","a",1210000,"24 person","5");
     
+    select * from room;
     create table about(
 		id int auto_increment primary key,
         title varchar(1500),
@@ -118,6 +120,7 @@ insert into forgive values
      insert into comment values
      (1,"Pham Van Hai","haivan@gmail.com","The best hotel that I have been");
      
+     select * from comment;
      
      create table gallery(
 		id int auto_increment primary key,
@@ -168,3 +171,6 @@ insert into forgive values
          userId int 
          );
          select * from booking;
+         
+         
+         SELECT user.fullName, booking.checkIn, booking.checkOut,booking.type,booking.adults,booking.children FROM booking, user WHERE user.id = booking.userId;

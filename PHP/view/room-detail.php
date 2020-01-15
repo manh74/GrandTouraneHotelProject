@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<title>Gallery</title>
+	<title>About Us</title>
 	<link REL="SHORTCUT ICON" HREF="../../img/logo.jpg">
 	<link rel="stylesheet" type="text/css" href="../../CSS/style.css">
 	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -32,7 +32,7 @@
 					<a class="nav-link" href="index.php">HOME</a>
 				</li>
 
-				<li class="nav-item">
+				<li class="nav-item active">
 					<a class="nav-link" href="room-rate.php">ROOM & RATE</a>
 				</li>
 				<li class="nav-item">
@@ -41,23 +41,24 @@
 				<li class="nav-item">
 					<a class="nav-link" href="book-tour.php">TOUR DESK</a>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item">
 					<a class="nav-link" href="gallery.php">GALLERY</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="info.php">ABOUT US</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" style="display: flex;">
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">
 						<div class="textbox">
-							<form class="form-inline" method="post" action="result.php">
+							<form class="form-inline">
 								<div class="form-group">
 									<div class="input-group">
-										<input type="text" name="search-input" class="form-control" placeholder="Search something..">
-										<button class="btn btn-secondary" name="search-button" type="submit">
+										<input type="text" class="form-control" placeholder="Search something..">
+										<button class="btn btn-secondary" type="button">
 											<i class="ion-ios-search-strong"></i>
 										</button>
 									</div>
+
 								</div>
 							</form>
 						</div>
@@ -86,89 +87,35 @@
 </div>
 <?php include 'login-modal.php'; ?>
 <br><br><br><br><br>
-<div class="container">
-	<center>
-		<span style="padding: 0 20px;
-		font-family: 'FontTitle';
-		font-size: 32px;
-		font-weight: 700;
-		position: relative;
-		color: #303f39;
-		text-transform: uppercase;">ALL PHOTO</span>
-		<?php if(isset($_SESSION["admin"])){?>
-			<br>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload">Upload</button>
-			<hr>
-		<?php } ?>
-	</center>
-	<div class="product-detail">
-	<div style="display: flex; justify-content: space-between;">
-		<div class="modal fade" id="upload" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="addNewFood">UPLOAD A PHOTO</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<form method="POST">
-							<div class="form-group">
-								<label>Link image:</label>
-								<input type="text" class="form-control" placeholder="Enter link image" name="up-gallery">
-							</div>
-							<div class="form-group">
-								<label for="new-name">Title:</label>
-								<input type="text" class="form-control" placeholder="Enter title" name="up-title">
-							</div>
-						</div>
-						<div class="modal-footer" style="display: flex; justify-content: space-between;">
-							<div>
-								<a href="https://imgbb.com/"><button type="button" class="btn btn-danger">Get link for image</button></a>
-							</div>
-							<div>
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-primary" name="upload-photo">Add</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<br>
 
-	<div class="row" style="background: none">
-		<div class="col-xs-12">
-			<div class="row"> 
-				<?php for ($i=0; $i < count($galleries); $i++) { ?>
-					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 5px;">
-						<div style="position: relative; overflow: hidden;">
-							<a title="<?php echo $galleries[$i]->title ?>">
-								<div>
-									<img style="height: 300px; width: 400px; position: relative;" src="<?php echo $galleries[$i]->image ?>">
-								</div>
-								<div style="background-image: url(//bizweb.dktcdn.net/100/372/532/themes/744930/assets/evo-tour-destinate.png?1576558299488);position: absolute; bottom: 0;  padding: 50px 10px 0px 10px; width: 100%;  color: #fff;  z-index: 999;">
-									<div><?php echo $galleries[$i]->title ?></div>
-									<div>Time upload:<span> <?php echo $galleries[$i]->timeUpdate ?></span></div>
-									<?php if(isset($_SESSION["admin"])){?>
-										<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
-									<?php } ?>
-								</div>
-							</a>
-						</div>
-					</div>
-				<?php } ?>               
+<div class="container">
+	<div class="header">
+		<h1><?php echo $room_detail[0]["name"]; ?></h1>
+		<hr>
+	</div>
+
+	<div class="row">
+
+		<div class="col-3">
+			<div class="list-group">
+				<button type="button" class="list-group-item list-group-item-action"><?php echo "Name: ".$room_detail[0]["name"]; ?></button>
+				<button type="button" class="list-group-item list-group-item-action"><?php echo "Price: ".number_format($room_detail[0]["price"]); ?></button>
+				<button type="button" class="list-group-item list-group-item-action"><?php echo "Max: ".$room_detail[0]["max"]; ?></button>
+				<button type="button" class="list-group-item list-group-item-action"><?php echo "Rate: ".$room_detail[0]["rate"]; ?></button>
 			</div>
+			<br>
+			<button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $rooms[$i]->id ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
 		</div>
+		<div class="col-9 justify-content-center">
+			<img width="500px" src="<?php echo $room_detail[0]["image"]; ?>">
+		</div>
+
 	</div>
 </div>
 <br>
 <div class="container">
-	<?php include 'footer.php'; ?>
+	<?php include 'footer.php';
+	?>
 </div>
-
-
 </body>
 </html>

@@ -49,15 +49,14 @@
 				<li class="nav-item" style="display: flex;">
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">
 						<div class="textbox">
-							<form class="form-inline">
+							<form class="form-inline" method="post" action="result.php">
 								<div class="form-group">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search something..">
-										<button class="btn btn-secondary" type="button">
+										<input type="text" name="search-input" class="form-control" placeholder="Search something..">
+										<button class="btn btn-secondary" name="search-button" type="submit">
 											<i class="ion-ios-search-strong"></i>
 										</button>
 									</div>
-
 								</div>
 							</form>
 						</div>
@@ -98,7 +97,8 @@
 			text-transform: uppercase;">FOOD</span>
 			<?php if(isset($_SESSION["admin"])){?>
 				<br>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newFood">ADD NEW FOOD</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#btAddFood">ADD NEW FOOD</button>
+				<br>
 			<?php } ?>
 		</center>
 		<br>
@@ -115,8 +115,8 @@
 								<div>Price:<span> <?php  echo $foods[$i]->price ?></span></div>
 								<button class="btn btn-primary" type="submit" name="cart" value=<?php  echo $foods[$i]->id ?> style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
 								<?php if(isset($_SESSION["admin"])){?>
-									<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
-									<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+									<button type="submit" name="edit-food" value="<?php echo $foods[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+									<button class="btn btn-danger" name="food-delete" value=<?php echo $foods[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
 								<?php } ?>
 							</div>
 						</a>
@@ -124,8 +124,11 @@
 				</div>
 			<?php } ?>
 		</div>
-
-		<?php include 'footer.php'; ?>
+		<?php 
+		include 'add-food-modal.php';
+		include 'edit-food-form.php';
+		echo "<br>";
+		include 'footer.php'; ?>
 	</div>
 </form>
 </body>

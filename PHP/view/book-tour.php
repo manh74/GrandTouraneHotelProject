@@ -50,11 +50,11 @@
 				<li class="nav-item">
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">
 						<div class="textbox">
-							<form class="form-inline">
+							<form class="form-inline" method="post" action="result.php">
 								<div class="form-group">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search something..">
-										<button class="btn btn-secondary" type="button">
+										<input type="text" name="search-input" class="form-control" placeholder="Search something..">
+										<button class="btn btn-secondary" name="search-button" type="submit">
 											<i class="ion-ios-search-strong"></i>
 										</button>
 									</div>
@@ -122,6 +122,7 @@
 					</h2>
 					<p style="color: #888;">Let's take a look at some of the most popular domestic tourist attractions with the Grand Tour!</p>
 				</div>
+				<?php include 'add-tour-modal.php'; ?>
 
 				<div class="row">
 					<?php for ($i=0; $i < count($tours); $i++) { ?>
@@ -165,8 +166,8 @@
 							<div>
 								<button type="submit" name="tour-cart-id" value="<?php  echo $tours[$i]->id ?>" class="btn btn-primary"><i class="ion-ios-cart"></i></button>
 								<?php if(isset($_SESSION["admin"])){?>
-									<button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
-									<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+									<button type="submit" name="edit-tour" value="<?php echo $tours[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+									<button type="submit" class="btn btn-danger" name="tour-delete" value=<?php echo $tours[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
 								<?php } ?>
 							</div>
 						</div>
@@ -197,31 +198,8 @@
 </div>
 
 <div class="container">
+	<?php include 'edit-tour-form.php'; ?>
 	<hr>
-	<div class="row">
-		<div class="col-lg-12">
-			<div style="text-align: center; margin-bottom: 20px;">
-				<h2 style="text-transform: uppercase;"><p style="color: black" title=""><span style="color: #ff5722">favorite destination</span></p></h2>
-				<p style="color: #888;">Domestic and foreign travel destinations</p>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-3 col-md-3 col-sm-6 col-6">
-			<div style="position: relative; overflow: hidden;">
-				<a title="Vịnh Hạ Long">
-					<div>
-						<img src="//bizweb.dktcdn.net/100/372/532/themes/744930/assets/evo_tour_destination_image_1.jpg?1576827284843">
-					</div>
-					<div style="background-image: url(//bizweb.dktcdn.net/100/372/532/themes/744930/assets/evo-tour-destinate.png?1576558299488);position: absolute; bottom: 0;  padding: 50px 10px 10px 10px; width: 100%;  color: #fff;  z-index: 999;">
-						<div>Vịnh Hạ Long</div>
-						<div>Đã có <span>1,600 +</span> lượt khách</div>
-					</div>
-				</a>
-			</div>
-		</div>
-		--
-	</div>
 	<?php include 'footer.php'; ?>
 </div>
 </body>

@@ -50,16 +50,16 @@
 				<li class="nav-item">
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">
 						<div class="textbox">
-							<form class="form-inline">
-								<div class="form-group">
-									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search something..">
-										<button class="btn btn-secondary" type="button">
-											<i class="ion-ios-search-strong"></i>
-										</button>
-									</div>
-								</div>
-							</form>
+							<form class="form-inline" method="post" action="result.php">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" name="search-input" class="form-control" placeholder="Search something..">
+                                        <button class="btn btn-secondary" name="search-button" type="submit">
+                                            <i class="ion-ios-search-strong"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
 						</div>
 					</div>
 				</li>
