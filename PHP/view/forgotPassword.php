@@ -9,7 +9,7 @@
   <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-<body class="bg">
+<body>
   <div class="login-form">
     <div class="login-title">
      <h1>Grand Tourane Hotel</h1>
@@ -37,6 +37,7 @@
              <!-- facebook -->
              <li> <a class="facebook" href="#" target="blank"><i class="fa fa-facebook"></i></a></li>
 
+             <!-- twitter -->
              <li> <a class="twitter" href="#" target="blank"><i class="fa fa-twitter"></i></a></li>
 
              <!-- google plus -->
@@ -54,9 +55,6 @@
   </div>
 
 </div>
-<br>
-<br>
-<br>
 <?php include 'footer.php'; ?>
 </body>
 </html>

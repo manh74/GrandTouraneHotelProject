@@ -26,7 +26,7 @@
 
 	<div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1110px; ">
 		<div class="collapse navbar-collapse" id="navbar">
-			<a class="navbar-brand" href="#"><img src="../../img/logo2.png"></a>
+			<a class="navbar-brand" href="index.php"><img src="../../img/logo2.png"></a>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<a class="nav-link" href="index.php">HOME</a>
@@ -113,7 +113,7 @@
                                     <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Connected Services</a>
+                                    <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Chat With Admin</a>
                                 </li>
                             </ul>
                             <div class="tab-content ml-1" id="myTabContent">

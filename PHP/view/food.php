@@ -106,15 +106,16 @@
 			<?php for ($i=0; $i < count($foods); $i++) { ?>
 				<div class="col-lg-3 col-md-3 col-sm-6 col-6" style="margin-bottom: 20px">
 					<div style="position: relative; overflow: hidden;">
-						<a title="<?php  echo $foods[$i]->name ?>">
+						<a title="<?php  echo $foods[$i]->name."-".$foods[$i]->price."đ" ?>">
 							<div>
 								<img width="450px" height="340px" src="<?php  echo $foods[$i]->image ?>">
 							</div>
 							<div style="background-image: url(//bizweb.dktcdn.net/100/372/532/themes/744930/assets/evo-tour-destinate.png?1576558299488);position: absolute; bottom: 0;  padding: 50px 10px 0px 10px; width: 100%;  color: #fff;  z-index: 999;">
-								<div><?php  echo $foods[$i]->name ?></div>
-								<div>Price:<span> <?php  echo $foods[$i]->price ?></span></div>
+								<div><b><?php  echo $foods[$i]->name ?></b></div>
+								<div>Price:<span style="color: red"><?php  echo number_format($foods[$i]->price)."VND" ?></span></div>
+								<?php if(isset($_SESSION["log-in"])){ ?>
 								<button class="btn btn-primary" type="submit" name="cart" value=<?php  echo $foods[$i]->id ?> style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-								<?php if(isset($_SESSION["admin"])){?>
+								<?php } if(isset($_SESSION["admin"])){?>
 									<button type="submit" name="edit-food" value="<?php echo $foods[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
 									<button class="btn btn-danger" name="food-delete" value=<?php echo $foods[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
 								<?php } ?>

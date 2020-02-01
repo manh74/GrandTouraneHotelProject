@@ -26,7 +26,7 @@
 
 	<div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1110px; ">
 		<div class="collapse navbar-collapse" id="navbar">
-			<a class="navbar-brand" href="#"><img src="../../img/logo2.png"></a>
+			<a class="navbar-brand" href="index.php"><img src="../../img/logo2.png"></a>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<a class="nav-link" href="index.php">HOME</a>
@@ -86,29 +86,42 @@
 	<?php include 'login-modal.php'; ?>
 	<br><br><br><br><br>
 	<div class="container">
+
 		<?php if(isset($_SESSION['admin'])){
-			?>
-			Hello <b style="color: blue"><?php echo $_SESSION['full-name'] ?></b> - Admin
-			<div class="promo-title">
+		?>
+		Hello <b style="color: blue"><?php echo $_SESSION['full-name'] ?></b> - Admin
+<div class="promo-title">
 				<a class="promo-title-a" href="">LIST OF CUSTOMER WAITING</a>
-				<form method="post" action=""> 	
+				<form method="post" action=""> 
+					
 					<table border="1px" align="center"> 
+						
 						<tr> 
-							<th>Full Name</th> 
-							<th>Check In</th> 
-							<th>Check Out</th> 
-							<th>Type</th>
+							<th>Name</th> 
+							<th>Quantity</th> 
+							<th>Price</th> 
+							<th>Action</th> 
 						</tr>
+
 						<?php 
-						for ($i=0; $i < count($booking); $i++) { ?> 
+						$_SESSION['total-price-room'] = 0;
+						for ($i=0; $i < count($room_cart_select); $i++) { ?> 
 							<tr> 
-								<td><?php echo  $booking[$i]['fullName'] ?></td>
-								<td><?php echo  $booking[$i]['checkIn'] ?></td>
-								<td><?php echo  $booking[$i]['checkOut'] ?></td>
-								<td><?php echo  $booking[$i]['type'] ?></td>
+								<td><?php echo  $room_cart_select[$i]['productName'] ?></td> 
+								<td><input type="text" size="5" value="<?php echo  $_SESSION['room-quantity'] = $room_cart_select[$i]['quantity'] ?>"></td> 
+								<td name="price" value="<?php echo  $room_cart_select[$i]['price'] ?>"><?php echo  $_SESSION['room-price'] = $room_cart_select[$i]['price'] ?></td> 
+								<td>
+									<button type="submit" name="remove-cart" value="<?php echo $room_cart_select[$i]['id'] ?>">Remove</button>
+									<button type="submit" name="update">UPDATE</button>
+								</td> 
 							</tr>
 							<?php 
+							$_SESSION['total-price-room']  +=  $_SESSION['room-price']*$_SESSION['room-quantity'];
 						} ?>
+						<tr> 
+							<td colspan="4">Total Price: <?php echo  $_SESSION['total-price-room'] ?></td> 
+						</tr> 
+						
 					</table> 
 					<br />
 					

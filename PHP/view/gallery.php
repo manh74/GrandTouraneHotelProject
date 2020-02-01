@@ -26,7 +26,7 @@
 
 	<div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1110px; ">
 		<div class="collapse navbar-collapse" id="navbar">
-			<a class="navbar-brand" href="#"><img src="../../img/logo2.png"></a>
+			<a class="navbar-brand" href="index.php"><img src="../../img/logo2.png"></a>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<a class="nav-link" href="index.php">HOME</a>
@@ -153,7 +153,9 @@
 									<div><?php echo $galleries[$i]->title ?></div>
 									<div>Time upload:<span> <?php echo $galleries[$i]->timeUpdate ?></span></div>
 									<?php if(isset($_SESSION["admin"])){?>
-										<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+										<form method="post">
+											<button type="submit" name="gallery-delete" value="<?php echo  $galleries[$i]->id ?>" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+										</form>
 									<?php } ?>
 								</div>
 							</a>

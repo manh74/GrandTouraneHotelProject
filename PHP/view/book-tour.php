@@ -26,7 +26,7 @@
 
 	<div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1110px; ">
 		<div class="collapse navbar-collapse" id="navbar">
-			<a class="navbar-brand" href="#"><img src="../../img/logo2.png"></a>
+			<a class="navbar-brand" href="index.php"><img src="../../img/logo2.png"></a>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<a class="nav-link" href="index.php">HOME</a>
@@ -160,12 +160,13 @@
 							</ul>
 						</div>
 						<div style="display: flex; justify-content: space-between; align-items: center;">
-							<div> <p style="color: #ff5722; font-weight: 500; ">
-								<?php  echo number_format($tours[$i]->price)."đ" ?> </p>
+							<div> <b style="color: #ff5722; font-weight: 700; ">
+								<?php  echo number_format($tours[$i]->price)."đ" ?> </b>
 							</div>
 							<div>
-								<button type="submit" name="tour-cart-id" value="<?php  echo $tours[$i]->id ?>" class="btn btn-primary"><i class="ion-ios-cart"></i></button>
-								<?php if(isset($_SESSION["admin"])){?>
+								<?php if(isset($_SESSION["log-in"])){ ?>
+									<button type="submit" name="tour-cart-id" value="<?php  echo $tours[$i]->id ?>" class="btn btn-primary"><i class="ion-ios-cart"></i></button>
+								<?php }if(isset($_SESSION["admin"])){?>
 									<button type="submit" name="edit-tour" value="<?php echo $tours[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
 									<button type="submit" class="btn btn-danger" name="tour-delete" value=<?php echo $tours[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
 								<?php } ?>

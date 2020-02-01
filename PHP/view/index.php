@@ -188,7 +188,7 @@
 												<option>4</option>
 											</select>
 											&emsp;
-											<button type="submit" class="btn btn-primary" name="book-room" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
+											<button class="btn btn-primary" <?php if(isset($_SESSION["log-in"])){ ?> type="submit" name="book-room" <?php } else { ?> data-toggle="modal" data-target="#login" <?php } ?> style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
 										</div> 
 									</div>
 								</div>
@@ -217,15 +217,19 @@
 							<img width="240px" height="200" src="<?php echo $rooms[$i]->image ?>"alt="<?php echo $rooms[$i]->name ?>"></a>
 						</div>
 						<div class="text">
-							<h2><a href="room-detail.html"><?php echo $rooms[$i]->name ?></a></h2>
+							<h2><button style="border: none; background-color: white" type="submit" name="info-room" value="<?php echo $rooms[$i]->id ?>"><?php echo $rooms[$i]->name ?></button></h2>
 							<ul>
 								<li><i class="fa fa-child" aria-hidden="true"></i> <?php echo $rooms[$i]->max ?></li>
-								<li><i class="fa fa-money" aria-hidden="true"></i> <?php echo $rooms[$i]->price ?></li>
-								<li><i class="fa fa-star-o" style="color: yellow" aria-hidden="true"></i> <?php echo $rooms[$i]->rate ?></li>
+								<li><i class="fa fa-money" aria-hidden="true"></i><b style="color: red"> <?php echo number_format($rooms[$i]->price)."VND" ?></b></li>
+								<li><i class="ion-ios-pulse-strong"></i><?php for($j = 0; $j < $rooms[$i]->rate; $j++){ ?><i class="fa fa-star" style="color: yellow" aria-hidden="true"></i><?php } ?> </li>
 							</ul>
 							<form method="post">
 								<button class="btn btn-primary" type="submit" name="info-room" value="<?php echo $rooms[$i]->id ?>"><i class="fa fa-info" aria-hidden="true"></i></button>
-								<button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $rooms[$i]->id ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
+								<?php 
+								if(isset($_SESSION["log-in"])){
+									?>
+									<button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $rooms[$i]->id ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
+								<?php } ?>
 								<?php if(isset($_SESSION["admin"])){?>
 									<button type="submit" name="edit-room" value="<?php echo $rooms[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
 									<button class="btn btn-danger" name="room-delete" value=<?php echo $rooms[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
@@ -262,9 +266,11 @@
 							<img height="300px" src="<?php  echo $foods[$i]->image ?>"
 							alt="<?php  echo $foods[$i]->name ?>">
 							<div class="card-body">
-								<h4 class="card-title"><?php  echo $foods[$i]->name ?></h4>
-								<p class="card-text"><?php  echo number_format($foods[$i]->price)."VND" ?></p>
-								<button class="btn btn-primary" type="submit" name="cart" value=<?php  echo $foods[$i]->id ?> style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+								<h5><b class="card-title"><i class="ion-spoon"></i><?php  echo $foods[$i]->name ?></b></h5>
+								<p class="card-text"><i class="fa fa-money" aria-hidden="true"></i><b style="color: red"><?php  echo number_format($foods[$i]->price)."VND" ?></b></p>
+								<?php if(isset($_SESSION["log-in"])){ ?>
+									<button class="btn btn-primary" type="submit" name="cart" value=<?php  echo $foods[$i]->id ?> style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+								<?php } ?>
 								<?php if(isset($_SESSION["admin"])){?>
 									<button type="submit" name="edit-food" value="<?php echo $foods[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
 									<button class="btn btn-danger" name="food-delete" value=<?php echo $foods[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
@@ -288,7 +294,7 @@
 			<div style="display: flex; justify-content: space-between; width: 2000px">
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 no-padding-left">
 					<div class="text">
-						<h2 class="heading"><?php  echo $about_select[0]['title'] ?></h2>
+						<h2 class="text-uppercase heading"><?php  echo $about_select[0]['title'] ?></h2>
 						<div class="desc">
 							<?php  echo $about_select[0]['content'] ?>
 						</div>
@@ -312,7 +318,7 @@
 				</div>
 				<div class="col-xss-12 col-xs-6 col-sm-6">
 					<div class="text">
-						<h2 class="heading"><?php  echo $about_select[1]['title'] ?></h2>
+						<h2 class="text-uppercase heading"><?php  echo $about_select[1]['title'] ?></h2>
 						<div class="desc">
 							<?php  echo $about_select[1]['content'] ?>
 						</div>
@@ -337,8 +343,8 @@
 				</div>
 				<div class="col-md-5 d-flex align-items-center">
 					<div>
-						<h3 class="font-weight-bold mb-4"><?php echo $cmt_select[count($cmt_select)-1]['name'] ?></h3>
-						<p><?php echo $cmt_select[count($cmt_select)-1]['content'] ?></p>
+						<h3 class="font-weight-bold mb-4"><i class="ion-person"></i><?php echo " ".$cmt_select[count($cmt_select)-1]['name'] ?></h3>
+						<p><i class="ion-chatbox-working"></i><?php echo " ".$cmt_select[count($cmt_select)-1]['content'] ?></p>
 						<a href="info.php"><button type="button" class="btn btn-info">REVIEW OUR HOTEL</button></a>
 
 					</div>
@@ -361,7 +367,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
 						<div class="icon-email">
-							<a href="#" title="Email"><img src="http://landing.engotheme.com/html/skyline/demo/images/Home-1/footer-top-icon-l.png" alt="Email" class="img-responsive"></a>
+							<a href="info.php" title="Email"><img src="http://landing.engotheme.com/html/skyline/demo/images/Home-1/footer-top-icon-l.png" alt="Email" class="img-responsive"></a>
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">
@@ -369,7 +375,7 @@
 							<form class="form-inline">
 								<div class="form-group">
 									<div class="input-group">
-										<input type="email" class="form-control" placeholder="Your email address">
+										<input type="text" class="form-control" placeholder="Please write your inquiries">
 										<button class="btn btn-secondary" type="button">
 											<i class="ion-android-send"></i>
 										</button>

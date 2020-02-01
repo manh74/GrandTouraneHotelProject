@@ -26,7 +26,7 @@
 
 	<div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1110px; ">
 		<div class="collapse navbar-collapse" id="navbar">
-			<a class="navbar-brand" href="#"><img src="../../img/logo2.png"></a>
+			<a class="navbar-brand" href="index.php"><img src="../../img/logo2.png"></a>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<a class="nav-link" href="index.php">HOME</a>
@@ -50,15 +50,14 @@
 				<li class="nav-item" style="display: flex;">
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">
 						<div class="textbox">
-							<form class="form-inline">
+							<form class="form-inline" method="post" action="result.php">
 								<div class="form-group">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search something..">
-										<button class="btn btn-secondary" type="button">
+										<input type="text" name="search-input" class="form-control" placeholder="Search something..">
+										<button class="btn btn-secondary" name="search-button" type="submit">
 											<i class="ion-ios-search-strong"></i>
 										</button>
 									</div>
-
 								</div>
 							</form>
 						</div>
@@ -89,24 +88,35 @@
 <br><br><br><br><br>
 
 <div class="container">
-	<div class="header">
-		<h1><?php echo $room_detail[0]["name"]; ?></h1>
-		<hr>
-	</div>
+	<form method="post">
+		<div class="header d-flex justify-content-between">
+			<div>
+				<h1><b><?php echo $room_detail[0]["name"]; ?></b></h1>
+			</div>
+			<div>
+				<button type="submit" name="room-before-detail" class="btn btn-success"><i class="ion-arrow-left-b"></i></button>
+				<button type="submit" name="room-next-detail" class="btn btn-warning"><i class="ion-arrow-right-b"></i></button>
+			</div>
+			<hr>
+		</div>
+	</form>
 
-	<div class="row">
+	<div class="row" style="display: flex; justify-content: space-around;">
 
-		<div class="col-3">
+		<div class="col-6">
 			<div class="list-group">
-				<button type="button" class="list-group-item list-group-item-action"><?php echo "Name: ".$room_detail[0]["name"]; ?></button>
-				<button type="button" class="list-group-item list-group-item-action"><?php echo "Price: ".number_format($room_detail[0]["price"]); ?></button>
-				<button type="button" class="list-group-item list-group-item-action"><?php echo "Max: ".$room_detail[0]["max"]; ?></button>
-				<button type="button" class="list-group-item list-group-item-action"><?php echo "Rate: ".$room_detail[0]["rate"]; ?></button>
+				<button type="button" class="list-group-item list-group-item-action"><i class="fa fa-home"></i><?php echo "Name: <b>".$room_detail[0]["name"]."</b>"; ?></button>
+				<button type="button" class="list-group-item list-group-item-action"><i class="fa fa-dollar"></i><?php echo "Price: <b>".number_format($room_detail[0]["price"])."VND</b>"; ?></button>
+				<button type="button" class="list-group-item list-group-item-action"><i class="fa fa-user"></i><?php echo "Max: <b>".$room_detail[0]["max"]."</b>"; ?></button>
+				<button type="button" class="list-group-item list-group-item-action"><i class="ion-ios-pulse-strong"></i><?php echo "Rate: "; for($j = 0; $j < $room_detail[0]["rate"]; $j++){ ?><i class="fa fa-star" style="color: yellow" aria-hidden="true"></i><?php } ?></button>
+				<i class="fa fa-star-half"></i>
 			</div>
 			<br>
-			<button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $rooms[$i]->id ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
+			<?php if(isset($_SESSION["log-in"])){ ?>
+				<button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $room_detail[0]["id"] ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
+			<?php } ?>
 		</div>
-		<div class="col-9 justify-content-center">
+		<div class="col-6">
 			<img width="500px" src="<?php echo $room_detail[0]["image"]; ?>">
 		</div>
 

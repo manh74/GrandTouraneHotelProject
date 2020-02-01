@@ -26,7 +26,7 @@
 
     <div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1110px; ">
         <div class="collapse navbar-collapse" id="navbar">
-            <a class="navbar-brand" href="#"><img src="../../img/logo2.png"></a>
+            <a class="navbar-brand" href="index.php"><img src="../../img/logo2.png"></a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="index.php">HOME</a>
@@ -83,71 +83,69 @@
             </ul>
         </div>
     </nav>
-    <?php include 'login-modal.php'; ?>
+    <?php include 'login-modal.php';?>
     <br><br><br><br><br>
 </div>
-
 <div class="container">
-   <div class="row">
-    <?php if(isset($searching_room)){ 
-        for($i = 0; $i < count($searching_room); $i++){
-            ?>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" style="border: 1px solid #e8e2d3">
-                <div>
-                    <a href="room-detail.html"><img width="240px" height="200" src="<?php echo $searching_room[$i]['image'] ?>"alt="#"></a>
-                </div>
-                <div class="text">
-                    <h2><a href="room-detail.html"><?php echo $searching_room[$i]['name'] ?></a></h2>
-                    <ul>
-                        <li><i class="fa fa-child" aria-hidden="true"></i> <?php echo $searching_room[$i]['max'] ?></li>
-                        <li><i class="fa fa-money" aria-hidden="true"></i> <?php echo $searching_room[$i]['price'] ?></li>
-                        <li><i class="fa fa-star-o" style="color: yellow" aria-hidden="true"></i> <?php echo $searching_room[$i]['rate'] ?></li>
-                    </ul>
-                    <form method="post">
-                        <button class="btn btn-primary"><i class="fa fa-info" aria-hidden="true"></i></button>
-                        <a class="btn btn-primary" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-                        <?php if(isset($_SESSION["admin"])){?>
-                            <button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
-                            <button class="btn btn-danger" name="room-delete" value=<?php echo $searching_room[$i]['id'] ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
-                        <?php } ?>
-                    </form>
-                </div>
-            </div>
-        <?php } }
-        if(isset($searching_room_by_price)){ 
-            for($i = 0; $i < count($searching_room_by_price); $i++){
+    <p>There are  <b style="color: red"><?php echo count($searching_room) ?></b> result</p>
+    <div class="row">
+        <?php if(isset($searching_room)){ 
+            for($i = 0; $i < count($searching_room); $i++){
                 ?>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3" style="border: 1px solid #e8e2d3">
                     <div>
-                        <a href="room-detail.html"><img width="240px" height="200" src="<?php echo $searching_room[$i]['image'] ?>"alt="#"></a>
+                        <img width="240px" height="200" src="<?php echo $searching_room[$i]['image'] ?>"alt="<?php echo $searching_room[$i]['name'] ?>"></a>
                     </div>
-                    <div class="text">
-                        <h2><a href="room-detail.html"><?php echo $searching_room_by_price[$i]['name'] ?></a></h2>
-                        <ul>
-                            <li><i class="fa fa-child" aria-hidden="true"></i> <?php echo $searching_room_by_price[$i]['max'] ?></li>
-                            <li><i class="fa fa-money" aria-hidden="true"></i> <?php echo $searching_room_by_price[$i]['price'] ?></li>
-                            <li><i class="fa fa-star-o" style="color: yellow" aria-hidden="true"></i> <?php echo $searching_room_by_price[$i]['rate'] ?></li>
-                        </ul>
-                        <form method="post">
-                            <button class="btn btn-primary"><i class="fa fa-info" aria-hidden="true"></i></button>
-                            <a class="btn btn-primary" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-                            <?php if(isset($_SESSION["admin"])){?>
-                                <button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
-                                <button class="btn btn-danger" name="room-delete" value=<?php echo $searching_room_by_price[$i]['id'] ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
-                            <?php } ?>
-                        </form>
-                    </div>
+                    <form method="post">
+                        <div class="text">
+                            <h2><button style="border: none; background-color: white" type="submit" name="info-room" value="<?php echo $searching_room[$i]['id'] ?>"><?php echo $searching_room[$i]['name'] ?></button></h2>
+                            <ul>
+                                <li><i class="fa fa-child" aria-hidden="true"></i> <?php echo $searching_room[$i]['max'] ?></li>
+                                <li><i class="fa fa-money" aria-hidden="true"></i><b style="color: red"> <?php echo number_format($searching_room[$i]['price'])."VND" ?></b></li>
+                                <li><i class="ion-ios-pulse-strong"></i><?php for($j = 0; $j < $searching_room[$i]['rate'] ; $j++){ ?><i class="fa fa-star" style="color: yellow" aria-hidden="true"></i><?php } ?> </li>
+                            </ul>
+                            <form method="post">
+                                <button class="btn btn-primary" type="submit" name="info-room" value="<?php echo $searching_room[$i]['id']  ?>"><i class="fa fa-info" aria-hidden="true"></i></button>
+                                <?php if(isset($_SESSION["log-in"])){ ?>
+                                    <button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $searching_room[$i]['id']  ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
+                                <?php } ?>
+                            </form>
+                        </div>
+                    </form>
                 </div>
-            <?php }?>
-        </div>
-    <?php } else{?> 
-        <p>no result</p>
-    <?php } ?>
-</div>
-<br>
-<div class="container">
-    <?php include 'footer.php'; ?>
-</div>
+            <?php } }
+            if(isset($searching_room_by_price)){ 
+                for($i = 0; $i < count($searching_room_by_price); $i++){
+                    ?>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" style="border: 1px solid #e8e2d3">
+                        <div>
+                            <a href="room-detail.html"><img width="240px" height="200" src="<?php echo $searching_room[$i]['image'] ?>"alt="#"></a>
+                        </div>
+                        <div class="text">
+                            <h2><a href="room-detail.html"><?php echo $searching_room_by_price[$i]['name'] ?></a></h2>
+                            <ul>
+                                <li><i class="fa fa-child" aria-hidden="true"></i> <?php echo $searching_room_by_price[$i]['max'] ?></li>
+                                <li><i class="fa fa-money" aria-hidden="true"></i> <?php echo $searching_room_by_price[$i]['price'] ?></li>
+                                <li><i class="fa fa-star-o" style="color: yellow" aria-hidden="true"></i> <?php echo $searching_room_by_price[$i]['rate'] ?></li>
+                            </ul>
+                            <form method="post">
+                                <button class="btn btn-primary"><i class="fa fa-info" aria-hidden="true"></i></button>
+                                <a class="btn btn-primary" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                                <?php if(isset($_SESSION["admin"])){?>
+                                    <button class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                    <button class="btn btn-danger" name="room-delete" value=<?php echo $searching_room_by_price[$i]['id'] ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+                                <?php } ?>
+                            </form>
+                        </div>
+                    </div>
+                <?php }?>
+            </div>
+        <?php } ?>
+    </div>
+    <br>
+    <div class="container">
+        <?php include 'footer.php'; ?>
+    </div>
 </div>
 
 </body>

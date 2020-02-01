@@ -26,7 +26,7 @@
 
 	<div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1110px; ">
 		<div class="collapse navbar-collapse" id="navbar">
-			<a class="navbar-brand" href="#"><img src="../../img/logo2.png"></a>
+			<a class="navbar-brand" href="index.php"><img src="../../img/logo2.png"></a>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<a class="nav-link" href="index.php">HOME</a>
@@ -50,15 +50,14 @@
 				<li class="nav-item" style="display: flex;">
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-5">
 						<div class="textbox">
-							<form class="form-inline">
+							<form class="form-inline" method="post" action="result.php">
 								<div class="form-group">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search something..">
-										<button class="btn btn-secondary" type="button">
+										<input type="text" name="search-input" class="form-control" placeholder="Search something..">
+										<button class="btn btn-secondary" name="search-button" type="submit">
 											<i class="ion-ios-search-strong"></i>
 										</button>
 									</div>
-
 								</div>
 							</form>
 						</div>
@@ -86,27 +85,7 @@
 	</nav>
 </div>
 <?php include 'login-modal.php'; ?>
-<br><br><br><br>
-<div class="container">
-	<section style="background: transparent;">
-		<span class="crumb-border"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12">
-					<ul class="breadcrumb"  itemtype="https://data-vocabulary.org/Breadcrumb">					
-						<li class="home">
-							<a><span>Home</span></a>						
-							<span>&nbsp;<i class="fa fa-angle-right"></i>&nbsp;</span>
-						</li>
-
-						<li><strong><span>About us</span></strong></li>
-
-					</ul>
-				</div>
-			</div>
-		</div>
-	</section> 
-</div>
+<br><br><br><br><br>
 </div>
 
 <div class="container" id="show">
@@ -117,9 +96,11 @@
 					<h2 style="text-transform: uppercase;">
 						<p>
 							<form method="post">
-								<span class="col-md-6" style="color: #ff5722"><?php echo $about_select[$i]["title"] ?></span>
-								<button class="btn btn-info"  name="about-edit" value="<?php echo $about_select[$i]["id"]?>"><i class="fa fa-edit" aria-hidden="true"></i></button>
-								<button class="btn btn-danger" name="about-delete" value=<?php echo $about_select[$i]["id"] ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+								<span class="col-md-6" style="color: #ff5722"><i class="ion-heart" style="color: red"></i><?php echo $about_select[$i]["title"] ?></span>
+								<?php if(isset($_SESSION["admin"])){?>
+									<button class="btn btn-info"  name="about-edit" value="<?php echo $about_select[$i]["id"]?>"><i class="fa fa-edit" aria-hidden="true"></i></button>
+									<button class="btn btn-danger" name="about-delete" value=<?php echo $about_select[$i]["id"] ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+								<?php } ?>
 							</form>
 						</p>
 					</h2>
@@ -131,39 +112,43 @@
 			<br>
 		<?php } ?>
 	</div>
-</div>
 <br>
 <?php include 'edit-about-form.php'; ?>
 <br>
 
-<div lass="container border border-danger">
+<div class="container border border-danger">
 	<div class="row" style="justify-content: center">
+		<?php if(isset($_SESSION["log-in"])){ ?>
 		<div class="col-sm-6 col-sm-offset-3">
 			<h3>Give us a feedback</h3>
 			<form method="post">
 				<div class="row">
 					<div class="form-group col-sm-6">
-						<label style="size: 15px">Name</label>
-						<input type="text" class="form-control" id="name" placeholder="Enter name" name="names" required>
+						<label style="size: 15px">Name:</label>
+						<input class="form-control" rows="5" name="names" value="<?php echo $profile[0]['fullName']; ?>">
 					</div>
 					<div class="form-group col-sm-6">
-						<label tyle="size: 15px">Email</label>
-						<input type="email" class="form-control" id="email" placeholder="Enter email" name="emails" required>
+						<label tyle="size: 15px">Email:</label>
+						<p name="emails" value=""><?php echo $profile[0]['email']; ?></p>
 					</div>
 				</div>
 				<div class="form-group">
-					<label tyle="size: 15px">Message</label>
+					<label tyle="size: 15px">Message:</label>
 					<textarea id="message" class="form-control" rows="5" placeholder="Enter your message" name="msg" required></textarea>
 				</div>
-				<button type="submit" name="send-feedback" class="btn btn-success btn-lg pull-right ">Submit</button>
+				<button type="submit" name="send-feedback" class="btn btn-success btn-lg pull-right ">Send</button>
 			</form>
 		</div>
+	<?php } else{?>
+		<button style="background: none;border: 1px solid gray; text-transform: uppercase;" type="submit" id="log-in" data-toggle="modal" data-target="#login"><a class="nav-link">Login to evaluate</a></button>
+	<?php } ?>
 	</div>
 </div>
 <br>
 <div class="container">
 	<?php include 'footer.php';
 	?>
+</div>
 </div>
 </body>
 </html>

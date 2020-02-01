@@ -104,15 +104,20 @@ for($i = 0; $i < count($galleries_select); $i++) {
 
 if(isset($_POST["search-button"])){
 	if(isset($_POST["search-input"])){
-		if(is_string($_POST["search-input"])){
-			$search_room_sql = "SELECT * FROM room WHERE name LIKE '%".$_POST["search-input"]."%'";
+		$_SESSION['search-input'] = $_POST["search-input"];
+	}
+}
+
+if(isset($_SESSION['search-input'])){
+	if(is_string($_SESSION['search-input'])){
+			$search_room_sql = "SELECT * FROM room WHERE name LIKE '%".$_SESSION['search-input']."%'";
 			$searching_room = $db->query($search_room_sql)->fetch_all(MYSQLI_ASSOC);
 		}
-		if(is_double($_POST["search-input"])){
-			$search_room_by_price_sql = "SELECT * FROM room WHERE price > ".$_POST["search-input"];
+		else{
+			$search_room_by_price_sql = "SELECT * FROM room WHERE price > ".$_SESSION['search-input'];
 			$searching_room_by_price = $db->query($search_room_by_price_sql)->fetch_all(MYSQLI_ASSOC);
 		}
-	}}
+}
 
 
 
@@ -207,6 +212,12 @@ if(isset($_POST["search-button"])){
 		header("refresh:0");
 	}
 
+	if(isset($_POST['gallery-delete'])){
+		$gallery_delete_sql = "DELETE from gallery where id = ".$_POST["gallery-delete"];
+		$db->query($gallery_delete_sql);
+		header("refresh:0");
+	}
+
 
 	if(isset($_SESSION["id"])){
 		$cart_select_sql = "SELECT * FROM cart WHERE userId = ".$_SESSION["id"]." AND type = 'food'";
@@ -224,6 +235,18 @@ if(isset($_POST["search-button"])){
 		header("location:room-detail.php");
 	}
 
+	if(isset($_POST["room-before-detail"])){
+		if($_SESSION["id-room-detail"]-1>0){
+			$_SESSION["id-room-detail"]--;
+		}
+	}
+
+	if(isset($_POST["room-next-detail"])){
+		if($_SESSION["id-room-detail"]<count($rooms)){
+			$_SESSION["id-room-detail"]++;
+		}
+	}
+
 	if(isset($_SESSION["id-room-detail"])){
 		$room_detail_sql  = "SELECT * FROM room WHERE id = ".$_SESSION["id-room-detail"];
 		$room_detail = $db->query($room_detail_sql)->fetch_all(MYSQLI_ASSOC);
@@ -239,7 +262,7 @@ if(isset($_POST["search-button"])){
 
 
 	if(isset($_POST["send-feedback"])){
-		$sql_feedback_insert = "INSERT INTO comment (name,email,content) VALUES('".$_POST["names"]."','".$_POST["emails"]."','".$_POST["msg"]."')";
+		$sql_feedback_insert = "INSERT INTO comment (name,email,content) VALUES('".$_POST["names"]."','".$profile[0]['email']."','".$_POST["msg"]."')";
 		echo $sql_feedback_insert;
 		$db->query($sql_feedback_insert);
 		header("refresh:0");
