@@ -60,33 +60,33 @@
                                     </div>
                                 </div>
                             </form>
-						</div>
-					</div>
-				</li>
-				<li class="nav-item" style="display: flex">
-					<?php if(isset($_SESSION["log-in"])){ ?>
-                       <a class="nav-link nav-item active" name="profile" href="profile.php"><i class="ion-person"></i></a>
-                       <a class="nav-link" name="cart" href="cart.php"><i class="ion-ios-cart"></i></a>
-                       <form method="post">
-                           <button style="background: none;border: none;" type="submit" name="log-out"><a class="nav-link"  id="log-out" ><i class="ion-log-out"></i></a></button>
-                       <?php } else{?>
-                           <button style="background: none;border: none;" type="submit" id="log-in" data-toggle="modal" data-target="#login"><a class="nav-link"><i class="ion-log-in"></i></a></button>
-                       <?php } ?>
-                   </form>
-                   <?php 
-                   if (isset($_POST['log-out'])) {
-                     session_destroy();
-                     header("refresh:0");
-                 } 
-                 ?>
-             </li>
-         </ul>
-     </div>
- </nav>
- <?php include 'login-modal.php'; ?>
- <br><br><br><br><br>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item" style="display: flex">
+                 <?php if(isset($_SESSION["log-in"])){ ?>
+                   <a class="nav-link nav-item active" name="profile" href="profile.php"><i class="ion-person"></i></a>
+                   <a class="nav-link" name="cart" href="cart.php"><i class="ion-ios-cart"></i></a>
+                   <form method="post">
+                       <button style="background: none;border: none;" type="submit" name="log-out"><a class="nav-link"  id="log-out" ><i class="ion-log-out"></i></a></button>
+                   <?php } else{?>
+                       <button style="background: none;border: none;" type="submit" id="log-in" data-toggle="modal" data-target="#login"><a class="nav-link"><i class="ion-log-in"></i></a></button>
+                   <?php } ?>
+               </form>
+               <?php 
+               if (isset($_POST['log-out'])) {
+                 session_destroy();
+                 header("refresh:0");
+             } 
+             ?>
+         </li>
+     </ul>
+ </div>
+</nav>
+<?php include 'login-modal.php'; ?>
+<br><br><br><br><br>
 
- <div class="container">
+<div class="container">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -113,12 +113,17 @@
                                     <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Chat With Admin</a>
+                                    <?php 
+                                    if(!isset($_SESSION["admin"])){ ?>
+                                        <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Chat With Admin</a>
+                                    <?php } else { ?>
+                                        <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Messenger</a>
+                                    <?php } ?>
                                 </li>
                             </ul>
                             <div class="tab-content ml-1" id="myTabContent">
                                 <div class="tab-pane fade show active" id="basicInfo" role="tabpanel">
-                                    
+
 
                                     <div class="row">
                                         <div class="col-sm-3 col-md-2 col-5">
@@ -139,8 +144,8 @@
                                         </div>
                                     </div>
                                     <hr />
-                                    
-                                    
+
+
                                     <div class="row">
                                         <div class="col-sm-3 col-md-2 col-5">
                                             <label style="font-weight:bold;">Phone</label>
@@ -171,18 +176,27 @@
 
                                 </div>
                                 <div class="tab-pane fade" id="connectedServices" role="tabpanel" >
-                                    Facebook, Google, Twitter Account that are connected to this account
-                                </div>
+                                   <?php 
+                                   if(isset($_SESSION["admin"])){ ?>
+                                       <div class="border-warning">
+                                        <p style="font-family: Comic Sans MS">Hi <b style="color: red"><?php echo $profile[0]['fullName']; ?>! </b>Function is being updated!<br>Please come back later!</p>
+                                    </div>
+                                <?php } else {?>
+                                    <div class="border-warning">
+                                        <p style="font-family: Comic Sans MS">Hi <b style="color: red"><?php echo $profile[0]['fullName']; ?>! </b>Function is being updated!<br>Please come back later!</p>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
+
             </div>
+
         </div>
     </div>
+</div>
 </div>
 <?php include 'footer.php'; ?>
 

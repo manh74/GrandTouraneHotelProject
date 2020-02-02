@@ -150,7 +150,7 @@
 									<img style="height: 300px; width: 400px; position: relative;" src="<?php echo $galleries[$i]->image ?>">
 								</div>
 								<div style="background-image: url(//bizweb.dktcdn.net/100/372/532/themes/744930/assets/evo-tour-destinate.png?1576558299488);position: absolute; bottom: 0;  padding: 50px 10px 0px 10px; width: 100%;  color: #fff;  z-index: 999;">
-									<div><?php echo $galleries[$i]->title ?></div>
+									<div><b><?php echo $galleries[$i]->title ?></b></div>
 									<div>Time upload:<span> <?php echo $galleries[$i]->timeUpdate ?></span></div>
 									<?php if(isset($_SESSION["admin"])){?>
 										<form method="post">

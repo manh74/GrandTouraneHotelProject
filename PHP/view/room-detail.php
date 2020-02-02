@@ -100,20 +100,21 @@
 			<hr>
 		</div>
 	</form>
-
 	<div class="row" style="display: flex; justify-content: space-around;">
-
 		<div class="col-6">
 			<div class="list-group">
 				<button type="button" class="list-group-item list-group-item-action"><i class="fa fa-home"></i><?php echo "Name: <b>".$room_detail[0]["name"]."</b>"; ?></button>
 				<button type="button" class="list-group-item list-group-item-action"><i class="fa fa-dollar"></i><?php echo "Price: <b>".number_format($room_detail[0]["price"])."VND</b>"; ?></button>
 				<button type="button" class="list-group-item list-group-item-action"><i class="fa fa-user"></i><?php echo "Max: <b>".$room_detail[0]["max"]."</b>"; ?></button>
 				<button type="button" class="list-group-item list-group-item-action"><i class="ion-ios-pulse-strong"></i><?php echo "Rate: "; for($j = 0; $j < $room_detail[0]["rate"]; $j++){ ?><i class="fa fa-star" style="color: yellow" aria-hidden="true"></i><?php } ?></button>
-				<i class="fa fa-star-half"></i>
 			</div>
 			<br>
 			<?php if(isset($_SESSION["log-in"])){ ?>
-				<button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $room_detail[0]["id"] ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
+				<form method="post">
+					<input type="datetime-local" class="form-control" name="date-start">
+					<br>
+					<button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $room_detail[0]["id"] ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+				</form> 
 			<?php } ?>
 		</div>
 		<div class="col-6">

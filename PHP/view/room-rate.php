@@ -112,9 +112,7 @@
                             <?php }?>
                             <br>
                             <button class="btn btn-primary" type="submit" name="info-room" value="<?php echo $rooms[$i]->id ?>"><i class="fa fa-info" aria-hidden="true"></i></button>
-                            <?php if(isset($_SESSION["log-in"])){ ?>
-                                <button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $rooms[$i]->id ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
-                            <?php } if(isset($_SESSION["admin"])){?>
+                            <?php if(isset($_SESSION["admin"])){?>
                                 <button type="submit" name="edit-room" value="<?php echo $rooms[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
                                 <button class="btn btn-danger" type="submit" name="room-delete" value=<?php echo $rooms[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
                             <?php } ?>
@@ -123,24 +121,22 @@
                 </div>
                 <br>
             <?php } else{ ?>
-             <div class="row" style="border: 1px solid #E5C9EF">
+               <div class="row" style="border: 1px solid #E5C9EF">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-5">
                     <div class="text-uppercase align-items-center">
-                            <h3><b><?php echo $rooms[$i]->name ?></b></h3>
-                            <h5><i class="fa fa-money" aria-hidden="true"></i><b style="color: red"><?php echo number_format($rooms[$i]->price) ?>/day</b></h5>
-                            <p><i class="fa fa-child" aria-hidden="true"></i> <?php echo $rooms[$i]->max ?></p>
-                            <i class="ion-ios-pulse-strong"></i><?php for($j = 0; $j < $rooms[$i]->rate; $j++){  ?>
-                                <i class="fa fa-star" style="color: yellow" aria-hidden="true"></i>
-                            <?php }?>
-                            <br>
-                            <button class="btn btn-primary" type="submit" name="info-room" value="<?php echo $rooms[$i]->id ?>"><i class="fa fa-info" aria-hidden="true"></i></button>
-                            <?php if(isset($_SESSION["log-in"])){ ?>
-                                <button type="submit" class="btn btn-primary" name="id-room" value="<?php echo $rooms[$i]->id ?>" style="color: white"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button> 
-                            <?php } if(isset($_SESSION["admin"])){?>
-                                <button type="submit" name="edit-room" value="<?php echo $rooms[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
-                                <button class="btn btn-danger" type="submit" name="room-delete" value=<?php echo $rooms[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
-                            <?php } ?>
-                        </div>
+                        <h3><b><?php echo $rooms[$i]->name ?></b></h3>
+                        <h5><i class="fa fa-money" aria-hidden="true"></i><b style="color: red"><?php echo number_format($rooms[$i]->price) ?>/day</b></h5>
+                        <p><i class="fa fa-child" aria-hidden="true"></i> <?php echo $rooms[$i]->max ?></p>
+                        <i class="ion-ios-pulse-strong"></i><?php for($j = 0; $j < $rooms[$i]->rate; $j++){  ?>
+                            <i class="fa fa-star" style="color: yellow" aria-hidden="true"></i>
+                        <?php }?>
+                        <br>
+                        <button class="btn btn-primary" type="submit" name="info-room" value="<?php echo $rooms[$i]->id ?>"><i class="fa fa-info" aria-hidden="true"></i></button>
+                        <?php if(isset($_SESSION["admin"])){?>
+                            <button type="submit" name="edit-room" value="<?php echo $rooms[$i]->id ?>" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                            <button class="btn btn-danger" type="submit" name="room-delete" value=<?php echo $rooms[$i]->id ?>><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+                        <?php } ?>
+                    </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
                     <div>

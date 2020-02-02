@@ -23,7 +23,6 @@
 	session_start();
 	include "connect.php";
 	?>
-
 	<div class="container"><nav class="navbar navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed; z-index: 999; width: 1110px; ">
 		<div class="collapse navbar-collapse" id="navbar">
 			<a class="navbar-brand" href="index.php"><img src="../../img/logo2.png"></a>
@@ -86,187 +85,248 @@
 	<?php include 'login-modal.php'; ?>
 	<br><br><br><br><br>
 	<div class="container">
-
 		<?php if(isset($_SESSION['admin'])){
-		?>
-		Hello <b style="color: blue"><?php echo $_SESSION['full-name'] ?></b> - Admin
-<div class="promo-title">
-				<a class="promo-title-a" href="">LIST OF CUSTOMER WAITING</a>
-				<form method="post" action=""> 
-					
-					<table border="1px" align="center"> 
-						
-						<tr> 
-							<th>Name</th> 
-							<th>Quantity</th> 
-							<th>Price</th> 
-							<th>Action</th> 
-						</tr>
-
-						<?php 
-						$_SESSION['total-price-room'] = 0;
-						for ($i=0; $i < count($room_cart_select); $i++) { ?> 
-							<tr> 
-								<td><?php echo  $room_cart_select[$i]['productName'] ?></td> 
-								<td><input type="text" size="5" value="<?php echo  $_SESSION['room-quantity'] = $room_cart_select[$i]['quantity'] ?>"></td> 
-								<td name="price" value="<?php echo  $room_cart_select[$i]['price'] ?>"><?php echo  $_SESSION['room-price'] = $room_cart_select[$i]['price'] ?></td> 
-								<td>
-									<button type="submit" name="remove-cart" value="<?php echo $room_cart_select[$i]['id'] ?>">Remove</button>
-									<button type="submit" name="update">UPDATE</button>
-								</td> 
-							</tr>
-							<?php 
-							$_SESSION['total-price-room']  +=  $_SESSION['room-price']*$_SESSION['room-quantity'];
-						} ?>
-						<tr> 
-							<td colspan="4">Total Price: <?php echo  $_SESSION['total-price-room'] ?></td> 
-						</tr> 
-						
-					</table> 
-					<br />
-					
-					
-				</form> 
-				<br /> 
-			</div>
-
-		<?php } else { ?>
-			<h1>View cart</h1> 
-			<a href="index.php">Go back to products page</a>
-
-			<div class="container">
+			?>
+			Hello <b style="color: blue"><?php echo $_SESSION['full-name'] ?></b> - Admin
+			<?php if (count($cart_admin_select)>0) {?>
 				<div class="promo-title">
-					<a class="promo-title-a" href="">FOOD</a>
-					<form method="post" action=""> 
-						
-						<table border="1px" align="center"> 
-							
+					<a class="promo-title-a" href="">LIST OF CUSTOMER WAITING</a>
+					<form method="post" action=""> 					
+						<table border="1px" align="center"> 						
 							<tr> 
-								<th>Name</th> 
+								<th>Customer name</th>
+								<th>Product names</th> 
+								<th>Type</th>
 								<th>Quantity</th> 
-								<th>Price</th> 
+								<th>Price</th>
+								<th>Date start</th> 
 								<th>Action</th> 
 							</tr>
-
 							<?php 
-							$_SESSION['total'] = 0;
-							for ($i=0; $i < count($cart_select); $i++) { ?> 
+							$_SESSION['total-price-admin'] = 0;
+							for ($i=0; $i < count($cart_admin_select); $i++) { ?> 
 								<tr> 
-									<td><?php echo  $cart_select[$i]['productName'] ?></td> 
-									<td><input type="text" size="5" value="<?php echo  $_SESSION['quantity'] = $cart_select[$i]['quantity'] ?>"></td> 
-									<td name="price" value="<?php echo  $cart_select[$i]['price'] ?>"><?php echo  $_SESSION['price'] = $cart_select[$i]['price'] ?></td> 
+									<td><?php echo  $cart_admin_select[$i]['fullName'] ?></td>
+									<td><?php echo  $cart_admin_select[$i]['productName'] ?></td>
+									<td><?php echo  $cart_admin_select[$i]['type'] ?></td> 
+									<td><input type="text" size="5" value="<?php echo  $_SESSION['quantity-admin'] = $cart_admin_select[$i]['quantity'] ?>"></td> 
+									<td name="price" value="<?php echo  $cart_admin_select[$i]['price'] ?>"><?php echo  $_SESSION['price-admin'] = $cart_admin_select[$i]['price'] ?></td> 
+									<td><?php echo  $cart_admin_select[$i]['time'] ?></td>
 									<td>
-										<button type="submit" name="remove-cart" value="<?php echo $cart_select[$i]['id'] ?>">Remove</button>
-										<button type="submit" name="update">UPDATE</button>
+										<button type="submit" name="remove-cart-admin" value="<?php echo $cart_admin_select[$i]['id'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+										<button type="submit" name="update"><i class="fa fa-refresh" aria-hidden="true"></i></button>
 									</td> 
 								</tr>
 								<?php 
-								$_SESSION['total']  +=  $_SESSION['price']*$_SESSION['quantity'];
+								$_SESSION['total-price-admin']  +=  $_SESSION['price-admin']*$_SESSION['quantity-admin'];
 							} ?>
 							<tr> 
-								<td colspan="4">Total Price: <?php echo  $_SESSION['total'] ?></td> 
-							</tr> 
-							
-						</table> 
-						<br />
-						
-						
-					</form> 
-					<br /> 
+								<td colspan="7"><b>Total Price: <?php echo  number_format($_SESSION['total-price-admin'])."VND" ?><b></td> 
+								</tr> 
+							</table> 
+							<br />
+						</form> 
+						<br /> 
+					</div>
+				<?php } ?>
+				<?php if (count($view_all_tour)>0) {?>
+					<div class="promo-title">
+						<a class="promo-title-a" href="">LIST OF CUSTOMER ORDERED ROOM </a>
+						<form method="post" action=""> 			
+							<table border="1px" align="center"> 					
+								<tr> 
+									<th>Name</th> 
+									<th>Check in</th> 
+									<th>Check out</th> 
+									<th>Type</th> 
+									<th>Adult</th>
+									<th>Children</th>
+									<th>Action</th>
+								</tr>
+								<?php 
+								for ($i=0; $i < count($view_all_tour); $i++) { ?> 
+									<tr> 
+										<td><?php echo  $view_all_tour[$i]['fullName'] ?></td> 
+										<td><?php echo  $view_all_tour[$i]['checkIn'] ?></td> 
+										<td><?php echo  $view_all_tour[$i]['checkOut'] ?></td>
+										<td><?php echo  $view_all_tour[$i]['type'] ?></td> 
+										<td><?php echo  $view_all_tour[$i]['adults'] ?></td> 
+										<td><?php echo  $view_all_tour[$i]['children'] ?></td>  
+										<td>
+											<button type="submit" name="remove-booking" value="<?php echo $view_all_tour[$i]['id'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></button> 
+										</td> 
+									</tr>
+									<?php 
+								} ?>
+							</table> 
+							<br/>	
+						</form> 
+						<br/> 
+					</div>
+				<?php }} else if (!isset($_SESSION["login"])) { ?>
+					<div class="border-warning">
+						<p style="font-family: Comic Sans MS"><b style="color: red">You are not logged in! Please login before viewing your cart!</b></p>
+					</div>
+				<?php } else { ?>
+					<h1>View cart</h1> 
+					<a href="index.php">Go back to products page</a>
+					<div class="container">
+						<?php if (count($cart_select)>0) {?>
+							<div class="promo-title">
+								<a class="promo-title-a" href="">FOOD</a>
+								<form method="post" action=""> 					
+									<table border="1px" align="center"> 							
+										<tr> 
+											<th>Name</th> 
+											<th>Quantity</th> 
+											<th>Price</th>
+											<th>Date order</th>
+											<th>Action</th> 
+										</tr>
+										<?php 
+										$_SESSION['total'] = 0;
+										for ($i=0; $i < count($cart_select); $i++) { ?> 
+											<tr> 
+												<td><?php echo  $cart_select[$i]['productName'] ?></td> 
+												<td><input type="text" size="5" value="<?php echo  $_SESSION['quantity'] = $cart_select[$i]['quantity'] ?>"></td> 
+												<td name="price" value="<?php echo  $cart_select[$i]['price'] ?>"><?php echo  $_SESSION['price'] = $cart_select[$i]['price'] ?></td> 
+												<td><?php echo  $cart_select[$i]['time'] ?></td>
+												<td>
+													<button type="submit" name="remove-cart" value="<?php echo $cart_select[$i]['id'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+													<button type="submit" name="update"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+												</td> 
+											</tr>
+											<?php 
+											$_SESSION['total']  +=  $_SESSION['price']*$_SESSION['quantity'];
+										} ?>
+										<tr> 
+											<td colspan="5">Total Price: <b><?php echo  number_format($_SESSION['total'])."VND" ?></b></td> 
+										</tr> 						
+									</table> 
+									<br />
+									<p style="font-family: Comic Sans MS"><b style="color: red">*</b>Please wait for us to 10-15 minutes to prepare the dish!</p>						
+								</form> 
+								<br /> 
+							</div>
+						<?php } ?>
+					</div>
+					<br>
+					<?php if (count($room_cart_select)>0) {?>
+						<div class="promo-title">
+							<a class="promo-title-a" href="">ROOM</a>
+							<form method="post" action=""> 					
+								<table border="1px" align="center"> 						
+									<tr> 
+										<th>Name</th> 
+										<th>Quantity</th> 
+										<th>Price</th>
+										<th>Day start</th>
+										<th>Action</th> 
+									</tr>
+									<?php 
+									$_SESSION['total-price-room'] = 0;
+									for ($i=0; $i < count($room_cart_select); $i++) { ?> 
+										<tr> 
+											<td><?php echo  $room_cart_select[$i]['productName'] ?></td> 
+											<td><input type="text" size="5" value="<?php echo  $_SESSION['room-quantity'] = $room_cart_select[$i]['quantity'] ?>"></td> 
+											<td name="price" value="<?php echo  $room_cart_select[$i]['price'] ?>"><?php echo  $_SESSION['room-price'] = $room_cart_select[$i]['price'] ?></td> 
+											<td><?php echo  $room_cart_select[$i]['time'] ?></td>
+											<td>
+												<button type="submit" name="remove-cart" value="<?php echo $room_cart_select[$i]['id'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+												<button type="submit" name="update"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+											</td> 
+										</tr>
+										<?php 
+										$_SESSION['total-price-room']  +=  $_SESSION['room-price']*$_SESSION['room-quantity'];
+									} ?>
+									<tr> 
+										<td colspan="5">Total Price: <b><?php echo  number_format($_SESSION['total-price-room'])."VND" ?></b></td> 
+									</tr> 						
+								</table> 
+								<br />	
+								<p style="font-family: Comic Sans MS"><b style="color: red">*</b>Please arrive at the hotel on time!</p>				
+							</form> 
+							<br /> 
+						</div>
+					<?php } ?>
+					<br>
+					<?php if (count($tour_cart_select)>0) {?>
+						<div class="promo-title">
+							<a class="promo-title-a" href="">TOUR</a>
+							<form method="post" action=""> 
+								<table border="1px" align="center"> 
+									<tr> 
+										<th>Name</th> 
+										<th>Quantity</th> 
+										<th>Price</th> 
+										<th>Action</th> 
+									</tr>
+									<?php 
+									$_SESSION['total-price-tour'] = 0;
+									for ($i=0; $i < count($tour_cart_select); $i++) { ?> 
+										<tr> 
+											<td><?php echo  $tour_cart_select[$i]['productName'] ?></td> 
+											<td><input type="text" size="5" value="<?php echo  $_SESSION['tour_quantity'] = $tour_cart_select[$i]['quantity'] ?>"></td> 
+											<td name="price" value="<?php echo  $tour_cart_select[$i]['price'] ?>"><?php echo  $_SESSION['tour_price'] = $tour_cart_select[$i]['price'] ?></td> 
+											<td>
+												<button type="submit" name="remove-tour-cart" value="<?php echo $tour_cart_select[$i]['id'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+												<button type="submit" name="update"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+											</td> 
+										</tr>
+										<?php 
+										$_SESSION['total-price-tour']  +=  $_SESSION['tour_price']*$_SESSION['tour_quantity'];
+									} ?>
+									<tr> 
+										<td colspan="4">Total Price: <b><?php echo  number_format($_SESSION['total-price-tour'])."VND" ?></b></td> 
+									</tr> 
+								</table> 
+								<br />
+								<p style="font-family: Comic Sans MS"><b style="color: red">*</b>We will rely on the information you have provided to contact you as soon as possible!</p>
+							</form> 
+							<br /> 
+						</div>
+					<?php }  if (count($booking)>0) {?>
+						<div class="promo-title">
+							<a class="promo-title-a" href="">ORDERED ROOM </a>
+							<form method="post" action=""> 
+								<table border="1px" align="center"> 
+									<tr> 
+										<th>Name</th> 
+										<th>Check in</th> 
+										<th>Check out</th> 
+										<th>Type</th> 
+										<th>Adult</th>
+										<th>Children</th>
+										<th>Action</th>
+									</tr>
+									<?php 
+									for ($i=0; $i < count($booking); $i++) { ?> 
+										<tr> 
+											<td><?php echo  $booking[$i]['fullName'] ?></td> 
+											<td><?php echo  $booking[$i]['checkIn'] ?></td> 
+											<td><?php echo  $booking[$i]['checkOut'] ?></td>
+											<td><?php echo  $booking[$i]['type'] ?></td> 
+											<td><?php echo  $booking[$i]['adults'] ?></td> 
+											<td><?php echo  $booking[$i]['children'] ?></td>  
+											<td>
+												<button type="submit" name="remove-booking" value="<?php echo $booking[$i]['id'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+											</td> 
+										</tr>
+										<?php 
+									} ?>
+								</table> 
+								<br/>
+								<p style="font-family: Comic Sans MS"><b style="color: red">*</b>Please arrive at the hotel on time!</p>	
+							</form> 
+							<br/> 
+						</div>
+					<?php } ?>
 				</div>
 			</div>
-
-
-
-			<br>
-			<div class="promo-title">
-				<a class="promo-title-a" href="">ROOM</a>
-				<form method="post" action=""> 
-					
-					<table border="1px" align="center"> 
-						
-						<tr> 
-							<th>Name</th> 
-							<th>Quantity</th> 
-							<th>Price</th> 
-							<th>Action</th> 
-						</tr>
-
-						<?php 
-						$_SESSION['total-price-room'] = 0;
-						for ($i=0; $i < count($room_cart_select); $i++) { ?> 
-							<tr> 
-								<td><?php echo  $room_cart_select[$i]['productName'] ?></td> 
-								<td><input type="text" size="5" value="<?php echo  $_SESSION['room-quantity'] = $room_cart_select[$i]['quantity'] ?>"></td> 
-								<td name="price" value="<?php echo  $room_cart_select[$i]['price'] ?>"><?php echo  $_SESSION['room-price'] = $room_cart_select[$i]['price'] ?></td> 
-								<td>
-									<button type="submit" name="remove-cart" value="<?php echo $room_cart_select[$i]['id'] ?>">Remove</button>
-									<button type="submit" name="update">UPDATE</button>
-								</td> 
-							</tr>
-							<?php 
-							$_SESSION['total-price-room']  +=  $_SESSION['room-price']*$_SESSION['room-quantity'];
-						} ?>
-						<tr> 
-							<td colspan="4">Total Price: <?php echo  $_SESSION['total-price-room'] ?></td> 
-						</tr> 
-						
-					</table> 
-					<br />
-					
-					
-				</form> 
-				<br /> 
-			</div>
-			<br>
-
-			<div class="promo-title">
-				<a class="promo-title-a" href="">TOUR</a>
-				<form method="post" action=""> 
-					<table border="1px" align="center"> 
-						
-						<tr> 
-							<th>Name</th> 
-							<th>Quantity</th> 
-							<th>Price</th> 
-							<th>Action</th> 
-						</tr>
-
-						<?php 
-						$_SESSION['total-price-tour'] = 0;
-						for ($i=0; $i < count($tour_cart_select); $i++) { ?> 
-							<tr> 
-								<td><?php echo  $tour_cart_select[$i]['productName'] ?></td> 
-								<td><input type="text" size="5" value="<?php echo  $_SESSION['tour_quantity'] = $tour_cart_select[$i]['quantity'] ?>"></td> 
-								<td name="price" value="<?php echo  $tour_cart_select[$i]['price'] ?>"><?php echo  $_SESSION['tour_price'] = $tour_cart_select[$i]['price'] ?></td> 
-								<td>
-									<button type="submit" name="remove-tour-cart" value="<?php echo $tour_cart_select[$i]['id'] ?>">Remove</button>
-									<button type="submit" name="update">UPDATE</button>
-								</td> 
-							</tr>
-							<?php 
-							$_SESSION['total-price-tour']  +=  $_SESSION['tour_price']*$_SESSION['tour_quantity'];
-						} ?>
-						<tr> 
-							<td colspan="4">Total Price: <?php echo  $_SESSION['total-price-tour'] ?></td> 
-						</tr> 
-						
-					</table> 
-					
-					<br />
-					
-					
-				</form> 
-				<br /> 
-			</div>
-		</div>
+		<?php } ?>
 	</div>
-<?php } ?>
+	<br>
+	<?php include 'footer.php'; ?>
 </div>
-<br>
-<?php include 'footer.php'; ?>
-
-</div>
-
 </body>
 </html>

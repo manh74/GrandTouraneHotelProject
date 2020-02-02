@@ -79,9 +79,11 @@ $cmt_select = $db->query($cmt_select_sql)->fetch_all(MYSQLI_ASSOC);
 $forgives_select_sql = "SELECT * FROM forgive";
 $forgives = $db->query($forgives_select_sql)->fetch_all(MYSQLI_ASSOC);
 
-$booking_select_sql = "SELECT user.fullName, booking.checkIn, booking.checkOut,booking.type,booking.adults,booking.children 
-FROM booking, user WHERE user.id = booking.userId";
-$booking = $db->query($booking_select_sql)->fetch_all(MYSQLI_ASSOC);
+if(isset($_SESSION["id"])){
+	$booking_select_sql = "SELECT user.fullName, booking.checkIn, booking.checkOut,booking.type,booking.adults,booking.children 
+	FROM booking, user WHERE user.id = booking.userId and user.id = ".$_SESSION["id"];
+	$booking = $db->query($booking_select_sql)->fetch_all(MYSQLI_ASSOC);
+}
 
 include '../model/Tour.php';
 $tours_select_sql = "SELECT * FROM tour";
@@ -110,183 +112,204 @@ if(isset($_POST["search-button"])){
 
 if(isset($_SESSION['search-input'])){
 	if(is_string($_SESSION['search-input'])){
-			$search_room_sql = "SELECT * FROM room WHERE name LIKE '%".$_SESSION['search-input']."%'";
-			$searching_room = $db->query($search_room_sql)->fetch_all(MYSQLI_ASSOC);
-		}
-		else{
-			$search_room_by_price_sql = "SELECT * FROM room WHERE price > ".$_SESSION['search-input'];
-			$searching_room_by_price = $db->query($search_room_by_price_sql)->fetch_all(MYSQLI_ASSOC);
-		}
+		$search_room_sql = "SELECT * FROM room WHERE name LIKE '%".$_SESSION['search-input']."%'";
+		$searching_room = $db->query($search_room_sql)->fetch_all(MYSQLI_ASSOC);
+	}
+	else{
+		$search_room_by_price_sql = "SELECT * FROM room WHERE price > ".$_SESSION['search-input'];
+		$searching_room_by_price = $db->query($search_room_by_price_sql)->fetch_all(MYSQLI_ASSOC);
+	}
 }
 
 
 
-	$search_food_sql = "SELECT * FROM food WHERE name LIKE '%a%'";
-	$searching_food = $db->query($search_food_sql)->fetch_all(MYSQLI_ASSOC);
+$search_food_sql = "SELECT * FROM food WHERE name LIKE '%a%'";
+$searching_food = $db->query($search_food_sql)->fetch_all(MYSQLI_ASSOC);
 
-	if(isset($_SESSION["log-in"])){
-		$profile_sql  = "SELECT * FROM User WHERE id = ".$_SESSION["id"];
-		$profile = $db->query($profile_sql)->fetch_all(MYSQLI_ASSOC);
+$cart_admin_select = $db->query( "SELECT cart.id, user.fullName, cart.productId, cart.type, cart.productName,cart.time,cart.quantity,cart.price FROM cart, user WHERE user.id = cart.userId")->fetch_all(MYSQLI_ASSOC);
+
+if(isset($_SESSION["log-in"])){
+	$profile_sql  = "SELECT * FROM User WHERE id = ".$_SESSION["id"];
+	$profile = $db->query($profile_sql)->fetch_all(MYSQLI_ASSOC);
+}
+
+
+if (isset($_SESSION['about-edit'])) {
+	$about_select_by_id = "SELECT * FROM about WHERE id = ".$_SESSION['about-edit'];
+	$about_edit_by_id = $db->query($about_select_by_id)->fetch_all(MYSQLI_ASSOC);
+
+}
+
+if(isset($_POST["edit-room"])){
+	$_SESSION['edit-room'] = $_POST['edit-room'];
+	$rooms_select_by_id = "SELECT * FROM room WHERE id = ".$_SESSION['edit-room'];
+	$room_edit_by_id = $db->query($rooms_select_by_id)->fetch_all(MYSQLI_ASSOC);
+}
+
+
+if(isset($_POST['room-update-submit'])){
+	$room_edit_sql = "UPDATE room
+	SET image = '".$_POST["links-room"]."', name= '".$_POST["names-room"]."', max= '".$_POST["maxs"]."', price= '".$_POST["prices"]."'
+	WHERE id = ".$_SESSION['edit-room'] ;
+	$db->query($room_edit_sql);
+	header("refresh:0");
+}
+
+if(isset($_POST["edit-food"])){
+	$_SESSION['edit-food'] = $_POST['edit-food'];
+	$foods_select_by_id = "SELECT * FROM food WHERE id = ".$_SESSION['edit-food'];
+	$food_edit_by_id = $db->query($foods_select_by_id)->fetch_all(MYSQLI_ASSOC);
+}
+
+
+if(isset($_POST['food-update-submit'])){
+	$food_edit_sql = "UPDATE food
+	SET image = '".$_POST["links-food"]."', name= '".$_POST["names-food"]."', price= '".$_POST["prices-food"]."'
+	WHERE id = ".$_SESSION['edit-food'] ;
+	$db->query($food_edit_sql);
+	header("refresh:0");
+}
+if(isset($_POST["edit-tour"])){
+	$_SESSION['edit-tour'] = $_POST['edit-tour'];
+	$tours_select_by_id = "SELECT * FROM tour WHERE id = ".$_SESSION['edit-tour'];
+	$tour_edit_by_id = $db->query($tours_select_by_id)->fetch_all(MYSQLI_ASSOC);
+}
+
+if(isset($_POST['tour-update-submit'])){
+	$tour_edit_sql = "UPDATE tour
+	SET image = '".$_POST["links-tour"]."', name= '".$_POST["names-tour"]."', price= '".$_POST["prices-tour"]."', time = '".$_POST["times"]."', start = '".$_POST["starts"]."'
+	WHERE id = ".$_SESSION['edit-tour'] ;
+	$db->query($tour_edit_sql);
+	header("refresh:0");
+}
+
+if(isset($_POST["edit-food"])){
+	$_SESSION['edit-food'] = $_POST['edit-food'];
+	$foods_select_by_id = "SELECT * FROM food WHERE id = ".$_SESSION['edit-food'];
+	$food_edit_by_id = $db->query($foods_select_by_id)->fetch_all(MYSQLI_ASSOC);
+}
+
+
+if(isset($_POST['about-update-submit'])){
+	$about_edit_sql = "UPDATE about
+	SET title = '".$_POST["title-update"]."', content= '".$_POST["content-update"]."'
+	WHERE id = ".$_SESSION['about-edit'] ;
+	$db->query($about_edit_sql);
+	header("refresh:0");
+}
+
+if(isset($_POST['about-delete'])){
+	$about_delete_sql = "DELETE from about where id = ".$_POST["about-delete"];
+	$db->query($about_delete_sql);
+	header("refresh:0");
+}
+
+if(isset($_POST['remove-cart-admin'])){
+	$cart_admin_delete_sql = "DELETE from cart where id = ".$_POST['remove-cart-admin'];
+	$db->query($cart_admin_delete_sql);
+	header("refresh:0");
+}
+
+if(isset($_POST['food-delete'])){
+	$food_delete_sql = "DELETE from food where id = ".$_POST["food-delete"];
+	$db->query($food_delete_sql);
+	header("refresh:0");
+}
+
+if(isset($_POST['tour-delete'])){
+	$tour_delete_sql = "DELETE from tour where id = ".$_POST["tour-delete"];
+	$db->query($tour_delete_sql);
+	header("refresh:0");
+}
+
+if(isset($_POST['gallery-delete'])){
+	$gallery_delete_sql = "DELETE from gallery where id = ".$_POST["gallery-delete"];
+	$db->query($gallery_delete_sql);
+	header("refresh:0");
+}
+if(isset($_POST['remove-booking'])){
+	$remove_booking_sql = "DELETE from booking where id =".$_POST["remove-booking"];
+	$db->query($remove_booking_sql);
+	header("refresh:0");
+}
+
+if(isset($_SESSION["admin"])){
+	
+}
+
+if(isset($_SESSION["id"])){
+	$cart_select_sql = "SELECT * FROM cart WHERE userId = ".$_SESSION["id"]." AND type = 'food'";
+	$cart_select = $db->query($cart_select_sql)->fetch_all(MYSQLI_ASSOC);
+
+	$room_cart_select_sql = "SELECT * FROM cart WHERE userId = ".$_SESSION["id"]." AND type = 'room'";
+	$room_cart_select = $db->query($room_cart_select_sql)->fetch_all(MYSQLI_ASSOC);
+
+	$tour_cart_select_sql = "SELECT * FROM cart WHERE userId = ".$_SESSION["id"]." AND type = 'tour'";
+	$tour_cart_select = $db->query($tour_cart_select_sql)->fetch_all(MYSQLI_ASSOC);
+}
+
+if (isset($_POST["info-room"])) {
+	$_SESSION["id-room-detail"] = $_POST["info-room"];
+	header("location:room-detail.php");
+}
+
+if(isset($_POST["room-before-detail"])){
+	if($_SESSION["id-room-detail"]-1>0){
+		$_SESSION["id-room-detail"]--;
 	}
+}
 
-
-	if (isset($_SESSION['about-edit'])) {
-		$about_select_by_id = "SELECT * FROM about WHERE id = ".$_SESSION['about-edit'];
-		$about_edit_by_id = $db->query($about_select_by_id)->fetch_all(MYSQLI_ASSOC);
-
+if(isset($_POST["room-next-detail"])){
+	if($_SESSION["id-room-detail"]<count($rooms)){
+		$_SESSION["id-room-detail"]++;
 	}
+}
 
-	if(isset($_POST["edit-room"])){
-		$_SESSION['edit-room'] = $_POST['edit-room'];
-		$rooms_select_by_id = "SELECT * FROM room WHERE id = ".$_SESSION['edit-room'];
-		$room_edit_by_id = $db->query($rooms_select_by_id)->fetch_all(MYSQLI_ASSOC);
-	}
+if(isset($_SESSION["id-room-detail"])){
+	$room_detail_sql  = "SELECT * FROM room WHERE id = ".$_SESSION["id-room-detail"];
+	$room_detail = $db->query($room_detail_sql)->fetch_all(MYSQLI_ASSOC);
+}
 
-
-	if(isset($_POST['room-update-submit'])){
-		$room_edit_sql = "UPDATE room
-		SET image = '".$_POST["links-room"]."', name= '".$_POST["names-room"]."', max= '".$_POST["maxs"]."', price= '".$_POST["prices"]."'
-		WHERE id = ".$_SESSION['edit-room'] ;
-		$db->query($room_edit_sql);
-		header("refresh:0");
-	}
-
-	if(isset($_POST["edit-food"])){
-		$_SESSION['edit-food'] = $_POST['edit-food'];
-		$foods_select_by_id = "SELECT * FROM food WHERE id = ".$_SESSION['edit-food'];
-		$food_edit_by_id = $db->query($foods_select_by_id)->fetch_all(MYSQLI_ASSOC);
-	}
+if(isset($_POST["id-room"])){
+	$room_cart_sql  = "SELECT * FROM room WHERE id = ".$_POST["id-room"];
+	$room_cart = $db->query($room_cart_sql)->fetch_all(MYSQLI_ASSOC);
+	$room_cart1 = "INSERT INTO cart (userId,productId,productName,quantity ,time,price,type) VALUES('".$_SESSION["id"]."',".$_POST["id-room"].",'".$room_cart[0]['name']."',1,'".$_POST["date-start"]."','".$room_cart[0]['price']."', 'room')";
+	$db->query($room_cart1);
+}
 
 
-	if(isset($_POST['food-update-submit'])){
-		$food_edit_sql = "UPDATE food
-		SET image = '".$_POST["links-food"]."', name= '".$_POST["names-food"]."', price= '".$_POST["prices-food"]."'
-		WHERE id = ".$_SESSION['edit-food'] ;
-		$db->query($food_edit_sql);
-		header("refresh:0");
-	}
-	if(isset($_POST["edit-tour"])){
-		$_SESSION['edit-tour'] = $_POST['edit-tour'];
-		$tours_select_by_id = "SELECT * FROM tour WHERE id = ".$_SESSION['edit-tour'];
-		$tour_edit_by_id = $db->query($tours_select_by_id)->fetch_all(MYSQLI_ASSOC);
-	}
+if(isset($_POST["send-feedback"])){
+	$sql_feedback_insert = "INSERT INTO comment (name,email,content) VALUES('".$_POST["names"]."','".$profile[0]['email']."','".$_POST["msg"]."')";
+	echo $sql_feedback_insert;
+	$db->query($sql_feedback_insert);
+	header("refresh:0");
+}
 
-	if(isset($_POST['tour-update-submit'])){
-		$tour_edit_sql = "UPDATE tour
-		SET image = '".$_POST["links-tour"]."', name= '".$_POST["names-tour"]."', price= '".$_POST["prices-tour"]."', time = '".$_POST["times"]."', start = '".$_POST["starts"]."'
-		WHERE id = ".$_SESSION['edit-tour'] ;
-		$db->query($tour_edit_sql);
-		header("refresh:0");
-	}
+if(isset($_POST["remove-cart"])){
+	$cart_remove = "DELETE from cart where id = ".$_POST["remove-cart"];
+	$db->query($cart_remove);
+	header("refresh:0");
+}
 
-	if(isset($_POST["edit-food"])){
-		$_SESSION['edit-food'] = $_POST['edit-food'];
-		$foods_select_by_id = "SELECT * FROM food WHERE id = ".$_SESSION['edit-food'];
-		$food_edit_by_id = $db->query($foods_select_by_id)->fetch_all(MYSQLI_ASSOC);
-	}
+if(isset($_POST["tour-cart-id"])){
+	$select_tour_cart_sql  = "SELECT * FROM tour WHERE id = ".$_POST["tour-cart-id"];
+	$cart_tour = $db->query($select_tour_cart_sql)->fetch_all(MYSQLI_ASSOC);
+	$sql_cart_insert = "INSERT INTO cart (userId,productId,productName,quantity ,price,type) VALUES('".$_SESSION["id"]."',".$_POST["tour-cart-id"].",'".$cart_tour[0]['name']."',1,'".$cart_tour[0]['price']."', 'tour')";
+	$db->query($sql_cart_insert);
+}
 
 
-	if(isset($_POST['about-update-submit'])){
-		$about_edit_sql = "UPDATE about
-		SET title = '".$_POST["title-update"]."', content= '".$_POST["content-update"]."'
-		WHERE id = ".$_SESSION['about-edit'] ;
-		$db->query($about_edit_sql);
-		header("refresh:0");
-	}
-
-	if(isset($_POST['about-delete'])){
-		$about_delete_sql = "DELETE from about where id = ".$_POST["about-delete"];
-		$db->query($about_delete_sql);
-		header("refresh:0");
-	}
-
-	if(isset($_POST['food-delete'])){
-		$food_delete_sql = "DELETE from food where id = ".$_POST["food-delete"];
-		$db->query($food_delete_sql);
-		header("refresh:0");
-	}
-
-	if(isset($_POST['tour-delete'])){
-		$tour_delete_sql = "DELETE from tour where id = ".$_POST["tour-delete"];
-		$db->query($tour_delete_sql);
-		header("refresh:0");
-	}
-
-	if(isset($_POST['gallery-delete'])){
-		$gallery_delete_sql = "DELETE from gallery where id = ".$_POST["gallery-delete"];
-		$db->query($gallery_delete_sql);
-		header("refresh:0");
-	}
+if(isset($_POST["cart"])){
+	$select_cart_sql  = "SELECT * FROM food WHERE id = ".$_POST["cart"];
+	$cartt = $db->query($select_cart_sql)->fetch_all(MYSQLI_ASSOC);
+	$sql_cart = "INSERT INTO cart (userId,productId,productName,quantity ,time, price,type) VALUES('".$_SESSION["id"]."',".$_POST["cart"].",'".$cartt[0]['name']."',1,now(),'".$cartt[0]['price']."', 'food')";
+	$db->query($sql_cart);
+}
 
 
-	if(isset($_SESSION["id"])){
-		$cart_select_sql = "SELECT * FROM cart WHERE userId = ".$_SESSION["id"]." AND type = 'food'";
-		$cart_select = $db->query($cart_select_sql)->fetch_all(MYSQLI_ASSOC);
-
-		$room_cart_select_sql = "SELECT * FROM cart WHERE userId = ".$_SESSION["id"]." AND type = 'room'";
-		$room_cart_select = $db->query($room_cart_select_sql)->fetch_all(MYSQLI_ASSOC);
-
-		$tour_cart_select_sql = "SELECT * FROM cart WHERE userId = ".$_SESSION["id"]." AND type = 'tour'";
-		$tour_cart_select = $db->query($tour_cart_select_sql)->fetch_all(MYSQLI_ASSOC);
-	}
-
-	if (isset($_POST["info-room"])) {
-		$_SESSION["id-room-detail"] = $_POST["info-room"];
-		header("location:room-detail.php");
-	}
-
-	if(isset($_POST["room-before-detail"])){
-		if($_SESSION["id-room-detail"]-1>0){
-			$_SESSION["id-room-detail"]--;
-		}
-	}
-
-	if(isset($_POST["room-next-detail"])){
-		if($_SESSION["id-room-detail"]<count($rooms)){
-			$_SESSION["id-room-detail"]++;
-		}
-	}
-
-	if(isset($_SESSION["id-room-detail"])){
-		$room_detail_sql  = "SELECT * FROM room WHERE id = ".$_SESSION["id-room-detail"];
-		$room_detail = $db->query($room_detail_sql)->fetch_all(MYSQLI_ASSOC);
-	}
 
 
-	if(isset($_POST["id-room"])){
-		$room_cart_sql  = "SELECT * FROM room WHERE id = ".$_POST["id-room"];
-		$room_cart = $db->query($room_cart_sql)->fetch_all(MYSQLI_ASSOC);
-		$room_cart1 = "INSERT INTO cart (userId,productId,productName,quantity ,price,type) VALUES('".$_SESSION["id"]."',".$_POST["id-room"].",'".$room_cart[0]['name']."',1,'".$room_cart[0]['price']."', 'room')";
-		$db->query($room_cart1);
-	}
+$select_tour_sql = "SELECT booking.id, user.fullName, booking.checkIn, booking.checkOut,booking.type,booking.adults,booking.children FROM booking, user WHERE user.id = booking.userId";
+$view_all_tour = $db->query($select_tour_sql)->fetch_all(MYSQLI_ASSOC);
 
-
-	if(isset($_POST["send-feedback"])){
-		$sql_feedback_insert = "INSERT INTO comment (name,email,content) VALUES('".$_POST["names"]."','".$profile[0]['email']."','".$_POST["msg"]."')";
-		echo $sql_feedback_insert;
-		$db->query($sql_feedback_insert);
-		header("refresh:0");
-	}
-
-	if(isset($_POST["remove-cart"])){
-		$cart_remove = "DELETE from cart where id = ".$_POST["remove-cart"];
-		$db->query($cart_remove);
-		header("refresh:0");
-	}
-
-	if(isset($_POST["tour-cart-id"])){
-		$select_tour_cart_sql  = "SELECT * FROM tour WHERE id = ".$_POST["tour-cart-id"];
-		$cart_tour = $db->query($select_tour_cart_sql)->fetch_all(MYSQLI_ASSOC);
-		$sql_cart_insert = "INSERT INTO cart (userId,productId,productName,quantity ,price,type) VALUES('".$_SESSION["id"]."',".$_POST["tour-cart-id"].",'".$cart_tour[0]['name']."',1,'".$cart_tour[0]['price']."', 'tour')";
-		$db->query($sql_cart_insert);
-	}
-
-
-	if(isset($_POST["cart"])){
-		$select_cart_sql  = "SELECT * FROM food WHERE id = ".$_POST["cart"];
-		$cartt = $db->query($select_cart_sql)->fetch_all(MYSQLI_ASSOC);
-		$sql_cart = "INSERT INTO cart (userId,productId,productName,quantity ,price,type) VALUES('".$_SESSION["id"]."',".$_POST["cart"].",'".$cartt[0]['name']."',1,'".$cartt[0]['price']."', 'food')";
-		$db->query($sql_cart);
-	}
-
-	?>
+?>
