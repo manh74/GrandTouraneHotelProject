@@ -32,7 +32,7 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="room-rate.php">ROOM & RATE</a>
+					<a class="nav-link" href="PHP/view/room-rate.php">ROOM & RATE</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="food.php">FOOD</a>
